@@ -3,59 +3,61 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import AnimateIn from "./AnimateIn";
 
 export default function CTA() {
   return (
-    <section className="py-20 sm:py-28 bg-primary relative overflow-hidden">
-      {/* Animated background shapes */}
-      <motion.div
-        className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full bg-white/5 blur-3xl"
-        animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-white/5 blur-3xl"
-        animate={{ x: [0, -60, 0], y: [0, -40, 0] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      />
+    <section className="relative w-full overflow-hidden py-20 sm:py-28 bg-surface">
+      {/* Subtle gradient glow — matches site palette */}
+      <div className="absolute inset-0 -z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full bg-primary/8 blur-[150px]" />
+        <div className="absolute bottom-0 right-1/4 h-[300px] w-[400px] rounded-full bg-secondary/5 blur-[120px]" />
+      </div>
 
-      {/* Grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
+      {/* Grid pattern overlay */}
+      <div className="grid-pattern absolute inset-0 opacity-[0.03]" />
 
-      <div className="mx-auto max-w-4xl px-6 text-center relative z-10">
-        <AnimateIn>
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-            Ready to build your digital everything?
+      {/* Top and bottom border accents */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+
+      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+        <AnimateIn variant="scaleIn">
+          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+            Ready to turn your idea into a{" "}
+            <span className="gradient-text">product that lasts?</span>
           </h2>
-          <p className="mt-4 text-lg text-white/80 max-w-2xl mx-auto">
-            Book a free 30-minute strategy call. We&apos;ll discuss your project, give
-            you an honest assessment, and outline next steps — no obligations.
+          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-light">
+            Book a free 30-minute call. Tell us what you&apos;re building, and
+            we&apos;ll show you exactly how we&apos;d take it from concept to
+            launch — and keep it running after.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="#contact"
-              className="group inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-base font-semibold text-primary shadow-lg hover:bg-surface hover:shadow-xl transition-all"
+              className={cn(
+                "group inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-3.5",
+                "text-base font-semibold text-background",
+                "glow-cyan hover:bg-primary-dark hover:scale-[1.02] transition-all duration-200"
+              )}
             >
-              Get a Free Quote{" "}
+              Book a Free Call
               <ArrowRight
                 size={18}
-                className="group-hover:translate-x-1 transition-transform"
+                className="transition-transform group-hover:translate-x-1"
               />
             </Link>
             <Link
-              href="mailto:hello@tinkerhive.com"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-7 py-3.5 text-base font-semibold text-white hover:bg-white/10 transition-all"
+              href="#about"
+              className={cn(
+                "inline-flex items-center gap-2 rounded-xl border border-[var(--border-light)] px-7 py-3.5",
+                "text-base font-semibold text-foreground",
+                "hover:border-primary/40 hover:bg-surface-alt transition-all duration-200"
+              )}
             >
-              hello@tinkerhive.com
+              Learn More
             </Link>
           </div>
         </AnimateIn>

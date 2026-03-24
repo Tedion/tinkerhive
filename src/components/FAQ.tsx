@@ -3,40 +3,41 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import AnimateIn, { StaggerContainer, StaggerItem } from "./AnimateIn";
+import { cn } from "@/lib/utils";
+import AnimateIn from "./AnimateIn";
 
 const faqs = [
   {
-    q: "How much does a website cost?",
-    a: "Simple business websites start at $800. E-commerce sites from $1,200. Custom web apps from $2,500. Every project gets a fixed-price quote upfront — no hourly billing surprises.",
+    q: "How much does it cost to build a product?",
+    a: "It depends on what you're building. A website might start at a few thousand dollars, a full app could be more. We'll give you an honest, fixed-price quote after a free call — no hidden fees, no surprises.",
   },
   {
-    q: "How long does a project take?",
-    a: "A business website: 1-3 weeks. A web app MVP: 4-8 weeks. Cloud infrastructure setup: 1-2 weeks. We'll give you a specific timeline in your proposal.",
+    q: "How long until my product is live?",
+    a: "A website typically takes 2-4 weeks. A full application takes 4-8 weeks. We'll give you a specific timeline before we start, with weekly check-ins so you always know where things stand.",
   },
   {
-    q: "Do I need to sign a long-term contract?",
-    a: "No. Project work is pay-per-project with 50% upfront. Ongoing support retainers are month-to-month with 30-day cancellation. No lock-in.",
+    q: "I'm not technical — will I understand what's happening?",
+    a: "Absolutely. We explain everything in plain language. You'll see your product take shape week by week, and we'll walk you through every decision. No jargon, no confusion.",
   },
   {
-    q: "Who actually does the work?",
-    a: "You work directly with a senior Full-Stack DevOps engineer with 8+ years of experience. We don't outsource or hand off to juniors. The person on your discovery call is the person writing your code.",
+    q: "Who actually builds my product?",
+    a: "The same person you talk to on your first call. TinkerHive is founder-led — you work directly with the engineer building your product. No middlemen, no outsourcing.",
   },
   {
-    q: "Where are you based?",
-    a: "We're a global team serving clients in the US, Canada, EU, Middle East, and Australia. We work in overlapping time zones and communicate in English.",
+    q: "What happens if something breaks after launch?",
+    a: "We fix it. That's the whole point — we don't disappear after launch. We monitor your product around the clock and respond within hours if anything goes wrong.",
   },
   {
-    q: "Can you manage my existing cloud infrastructure?",
-    a: "Yes. We manage AWS, GCP, and Azure environments. We'll audit your current setup, optimize costs, improve security, and provide ongoing monitoring — typically saving 20-40% on cloud bills. Retainers start at $300/month.",
+    q: "Do I own everything you build?",
+    a: "100%. The code, the design, the infrastructure — it's all yours from day one. We'll never hold your product hostage.",
   },
   {
-    q: "Do I own the code?",
-    a: "100% yes. All code, designs, and infrastructure configurations are yours. We use open-source tools wherever possible so you're never locked into proprietary platforms.",
+    q: "Can you take over a product someone else built?",
+    a: "Yes. We regularly take over existing products, clean them up, fix what's broken, and set them up to run properly. We'll audit it first and give you an honest assessment.",
   },
   {
-    q: "What if something breaks after launch?",
-    a: "All projects include 14 days of free bug-fix support post-launch. After that, our support retainers start at $50/month for basic maintenance and go up depending on scope.",
+    q: "I already have an app but no one maintaining it. Can you help?",
+    a: "That's exactly what we do. We'll take over your product, keep it running, handle updates and fixes, and make sure it doesn't fall apart. You focus on your business.",
   },
 ];
 
@@ -44,54 +45,78 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-20 sm:py-28 bg-surface">
+    <section id="faq" className="relative bg-background py-20 sm:py-28">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-1/3 left-1/4 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/3 h-[300px] w-[300px] rounded-full bg-secondary/5 blur-[120px]" />
+      </div>
       <div className="mx-auto max-w-3xl px-6">
-        <AnimateIn className="text-center">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-            FAQ
+        <AnimateIn variant="fadeUp" className="text-center">
+          <p className="font-mono text-sm font-semibold uppercase tracking-wider text-primary">
+            // FAQ
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Frequently asked questions
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Frequently Asked Questions
           </h2>
-          <p className="mt-4 text-lg text-muted">
+          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-light">
             Everything you need to know before getting started.
           </p>
         </AnimateIn>
 
-        <StaggerContainer className="mt-12 space-y-3" stagger={0.06}>
+        <div className="mt-12 space-y-3">
           {faqs.map((faq, i) => (
-            <StaggerItem key={faq.q}>
-              <div className="rounded-xl border border-border bg-white overflow-hidden">
+            <motion.div
+              key={faq.q}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.05, duration: 0.4 }}
+            >
+              <div
+                className={cn(
+                  "glass overflow-hidden rounded-xl transition-colors duration-200",
+                  openIndex === i && "border-primary/30"
+                )}
+              >
                 <button
-                  className="flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer hover:bg-surface/50 transition-colors"
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                  className="flex w-full cursor-pointer items-center justify-between px-6 py-5 text-left transition-colors hover:bg-white/[0.02]"
+                  onClick={() =>
+                    setOpenIndex(openIndex === i ? null : i)
+                  }
                   aria-expanded={openIndex === i}
+                  id={`faq-button-${i}`}
+                  aria-controls={`faq-panel-${i}`}
                 >
-                  <span className="text-sm font-semibold text-foreground pr-4">
+                  <span className="pr-4 font-sans text-sm font-semibold text-foreground">
                     {faq.q}
                   </span>
                   <motion.div
                     animate={{ rotate: openIndex === i ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    className="shrink-0"
                   >
                     <ChevronDown
                       size={18}
-                      className="shrink-0 text-muted"
+                      className="text-muted-light"
                       aria-hidden="true"
                     />
                   </motion.div>
                 </button>
-                <AnimatePresence>
+
+                <AnimatePresence initial={false}>
                   {openIndex === i && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
                       className="overflow-hidden"
+                      id={`faq-panel-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-button-${i}`}
                     >
                       <div className="px-6 pb-5">
-                        <p className="text-sm text-muted leading-relaxed">
+                        <p className="text-sm leading-relaxed text-muted-light">
                           {faq.a}
                         </p>
                       </div>
@@ -99,9 +124,9 @@ export default function FAQ() {
                   )}
                 </AnimatePresence>
               </div>
-            </StaggerItem>
+            </motion.div>
           ))}
-        </StaggerContainer>
+        </div>
       </div>
     </section>
   );

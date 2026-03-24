@@ -1,33 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { Eye, Shield, FileCheck } from "lucide-react";
+import { cn } from "@/lib/utils";
 import AnimateIn, { StaggerContainer, StaggerItem } from "./AnimateIn";
 
-const testimonials = [
+const promises = [
   {
-    name: "Sarah Mitchell",
-    role: "Founder, GreenLeaf Marketing",
-    location: "Dallas, TX",
-    quote:
-      "TinkerHive rebuilt our website from scratch and the results were incredible — page load went from 6 seconds to under 1, and our contact form submissions tripled in 3 months. Truly professional work.",
-    rating: 5,
+    title: "You'll See Progress Every Week",
+    icon: Eye,
+    description:
+      "No black boxes. We share progress every week with demos, updates, and clear next steps. You're never left wondering what's happening.",
   },
   {
-    name: "James Al-Rashid",
-    role: "CTO, NovaPay",
-    location: "Dubai, UAE",
-    quote:
-      "They migrated our entire infrastructure to a private cloud and cut our monthly bill by 40%. Having direct access to a senior engineer who actually understood our stack made all the difference.",
-    rating: 5,
+    title: "We Don't Disappear After Launch",
+    icon: Shield,
+    description:
+      "Most agencies build and leave. We monitor, maintain, and improve your product long after it goes live. We stay.",
   },
   {
-    name: "Emily Chen",
-    role: "Founder, StudyBridge",
-    location: "Melbourne, AUS",
-    quote:
-      "We needed an MVP fast and on a tight budget. TinkerHive delivered a fully working web app in 5 weeks — React frontend, Node backend, deployed on Kubernetes. Other agencies quoted us 4 months and 3x the price.",
-    rating: 5,
+    title: "No Surprises. Ever.",
+    icon: FileCheck,
+    description:
+      "Fixed pricing, clear timelines, honest communication. If something changes, you'll know before it happens — not after.",
   },
 ];
 
@@ -38,68 +33,55 @@ export default function Testimonials() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/[0.02] rounded-full blur-3xl -z-10" />
 
       <div className="mx-auto max-w-7xl px-6">
-        <AnimateIn className="text-center">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-            Testimonials
+        {/* Section header */}
+        <AnimateIn className="text-center mb-16">
+          <p className="font-mono text-sm text-primary tracking-wider mb-3">
+            // OUR PROMISE
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Trusted by businesses worldwide
+          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            What You Can{" "}
+            <span className="gradient-text">Count On</span>
           </h2>
-          <p className="mt-4 text-lg text-muted max-w-2xl mx-auto">
-            Don&apos;t take our word for it — here&apos;s what our clients say.
-          </p>
         </AnimateIn>
 
-        <StaggerContainer className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" stagger={0.12}>
-          {testimonials.map((t) => (
-            <StaggerItem key={t.name}>
+        {/* Promise cards */}
+        <StaggerContainer
+          className="grid gap-8 grid-cols-1 md:grid-cols-3"
+          stagger={0.12}
+        >
+          {promises.map((p) => (
+            <StaggerItem key={p.title} variant="scaleIn">
               <motion.div
-                whileHover={{ y: -4 }}
+                whileHover={{ y: -6 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="relative rounded-2xl border border-border bg-white p-8 hover:shadow-xl hover:border-primary/20 transition-all h-full"
+                className={cn(
+                  "glass rounded-2xl p-8 h-full relative group",
+                  "hover:border-primary/30 transition-all duration-300"
+                )}
               >
-                {/* Quote decoration */}
-                <Quote
-                  size={40}
-                  className="absolute top-6 right-6 text-primary/[0.06]"
+                {/* Hover border glow */}
+                <div
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    boxShadow: "inset 0 0 0 1px rgba(0, 180, 216, 0.2), 0 0 20px rgba(0, 180, 216, 0.05)",
+                  }}
                   aria-hidden="true"
                 />
 
-                {/* Stars */}
-                <div className="flex gap-1" aria-label={`${t.rating} out of 5 stars`}>
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className="fill-accent text-accent"
-                      aria-hidden="true"
-                    />
-                  ))}
+                {/* Icon */}
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 mb-5">
+                  <p.icon size={24} className="text-primary" />
                 </div>
 
-                <blockquote className="mt-4 text-sm text-foreground leading-relaxed relative z-10">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
+                {/* Title */}
+                <h3 className="font-display text-lg font-bold text-foreground relative z-10">
+                  {p.title}
+                </h3>
 
-                <div className="mt-6 pt-5 border-t border-border flex items-center gap-3">
-                  <div
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold text-sm"
-                    aria-hidden="true"
-                  >
-                    {t.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">
-                      {t.name}
-                    </p>
-                    <p className="text-xs text-muted">
-                      {t.role} — {t.location}
-                    </p>
-                  </div>
-                </div>
+                {/* Description */}
+                <p className="mt-3 text-sm text-muted-light leading-relaxed relative z-10">
+                  {p.description}
+                </p>
               </motion.div>
             </StaggerItem>
           ))}

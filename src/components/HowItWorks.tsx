@@ -1,96 +1,201 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageSquare, FileText, Rocket, Headphones } from "lucide-react";
-import AnimateIn, { StaggerContainer, StaggerItem } from "./AnimateIn";
+import { MessageSquare, FileCode, Rocket, Headphones, Check } from "lucide-react";
+import AnimateIn from "./AnimateIn";
 
-const steps = [
+interface Message {
+  from: "client" | "tinkerhive";
+  text: string;
+  step?: {
+    number: string;
+    title: string;
+    timeline: string;
+    icon: typeof MessageSquare;
+  };
+  delay: number;
+}
+
+const conversation: Message[] = [
   {
-    icon: MessageSquare,
-    step: "01",
-    title: "Discovery Call",
-    description:
-      "We hop on a free 30-minute call to understand your business, goals, and technical needs. No jargon, just a conversation.",
-    timeline: "Day 1",
+    from: "client",
+    text: "Hey, I have an idea for an app. Where do I start?",
+    delay: 0,
   },
   {
-    icon: FileText,
-    step: "02",
-    title: "Proposal & Plan",
-    description:
-      "You get a clear scope, timeline, and fixed price. No surprises. We agree on milestones before a single line of code is written.",
-    timeline: "Day 2-3",
+    from: "tinkerhive",
+    text: "Let's hop on a free call. Tell us everything — we'll figure out the best path forward together.",
+    step: { number: "01", title: "Tell Us Your Idea", timeline: "Day 1", icon: MessageSquare },
+    delay: 0.15,
   },
   {
-    icon: Rocket,
-    step: "03",
-    title: "Build & Launch",
-    description:
-      "We build fast, share progress weekly, and launch when you're happy. You have direct access to the senior engineer doing the work.",
-    timeline: "Week 1-6",
+    from: "client",
+    text: "Sounds good. What happens after the call?",
+    delay: 0.3,
   },
   {
-    icon: Headphones,
-    step: "04",
-    title: "Ongoing Support",
-    description:
-      "Post-launch monitoring, maintenance, and improvements. We don't disappear after delivery — we're your long-term tech partner.",
-    timeline: "Ongoing",
+    from: "tinkerhive",
+    text: "We send you a clear plan — what we'll build, how long it takes, and what it costs. No surprises.",
+    step: { number: "02", title: "We Plan It", timeline: "Day 2-3", icon: FileCode },
+    delay: 0.45,
+  },
+  {
+    from: "client",
+    text: "And then you start building?",
+    delay: 0.6,
+  },
+  {
+    from: "tinkerhive",
+    text: "Exactly. You'll see progress every week. We build it, test it, and take it live — you give feedback along the way.",
+    step: { number: "03", title: "We Build & Launch", timeline: "Week 1-6", icon: Rocket },
+    delay: 0.75,
+  },
+  {
+    from: "client",
+    text: "What about after launch? What if something breaks?",
+    delay: 0.9,
+  },
+  {
+    from: "tinkerhive",
+    text: "We don't disappear. We monitor your product 24/7, fix issues fast, and scale it as you grow. We stay.",
+    step: { number: "04", title: "We Keep It Running", timeline: "Ongoing", icon: Headphones },
+    delay: 1.05,
   },
 ];
 
+function StepBadge({ step }: { step: NonNullable<Message["step"]> }) {
+  const Icon = step.icon;
+  return (
+    <div className="flex items-center gap-3 mb-2 mt-1">
+      <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/15 border border-primary/20">
+        <Icon className="w-4 h-4 text-primary" />
+      </div>
+      <div>
+        <div className="flex items-center gap-2">
+          <span className="font-display text-lg font-bold text-primary">{step.number}</span>
+          <span className="font-display text-sm font-semibold text-foreground">{step.title}</span>
+        </div>
+        <span className="font-mono text-[10px] text-primary/70 tracking-wider">{step.timeline}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <AnimateIn className="text-center">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
-            Our Process
+    <section id="process" className="relative py-24 sm:py-32 overflow-hidden">
+      <div className="mx-auto max-w-3xl px-6">
+        {/* Header */}
+        <AnimateIn variant="fadeUp" className="text-center mb-16">
+          <p className="font-mono text-sm text-muted-light tracking-widest uppercase mb-3">
+            // PROCESS
           </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            How it works
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">
+            How It <span className="gradient-text">Works</span>
           </h2>
-          <p className="mt-4 text-lg text-muted max-w-2xl mx-auto">
-            From first call to live product in weeks, not months. Here&apos;s the
-            process.
+          <p className="mt-4 text-muted-light max-w-lg mx-auto">
+            From first conversation to a live product — here&apos;s what working with us looks like.
           </p>
         </AnimateIn>
 
-        <div className="mt-16 relative">
-          {/* Animated connector line */}
-          <motion.div
-            className="hidden lg:block absolute top-24 left-[calc(12.5%+1rem)] right-[calc(12.5%+1rem)] h-0.5 bg-gradient-to-r from-primary/40 via-primary to-primary/40"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.3 }}
-            style={{ originX: 0 }}
-          />
+        {/* Chat window */}
+        <div className="glass rounded-2xl border border-[var(--border-light)] overflow-hidden">
+          {/* Chat header */}
+          <div className="flex items-center gap-3 px-5 py-3 border-b border-[var(--border-light)] bg-surface/50">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary font-display text-sm font-bold text-background">
+              T
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground">TinkerHive</p>
+              <div className="flex items-center gap-1">
+                <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
+                <span className="text-[11px] text-muted-light">Online — typically replies instantly</span>
+              </div>
+            </div>
+          </div>
 
-          <StaggerContainer className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.15}>
-            {steps.map((s) => (
-              <StaggerItem key={s.step}>
-                <div className="relative text-center group">
-                  <motion.div
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                    className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white text-sm font-bold shadow-lg shadow-primary/25 relative z-10"
-                  >
-                    <s.icon size={28} />
-                  </motion.div>
-                  <span className="mt-4 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                    {s.timeline}
-                  </span>
-                  <h3 className="mt-3 text-lg font-semibold text-foreground">
-                    {s.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-muted leading-relaxed">
-                    {s.description}
+          {/* Messages */}
+          <div className="p-5 space-y-4">
+            {conversation.map((msg, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: msg.delay, duration: 0.35, ease: "easeOut" }}
+                className={`flex ${msg.from === "client" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`max-w-[80%] sm:max-w-[70%] ${
+                    msg.from === "client"
+                      ? "bg-primary/15 border border-primary/20 rounded-2xl rounded-br-md"
+                      : "bg-surface-alt/80 border border-[var(--border-light)] rounded-2xl rounded-bl-md"
+                  } px-4 py-3`}
+                >
+                  {/* Step badge for TinkerHive messages */}
+                  {msg.step && <StepBadge step={msg.step} />}
+
+                  <p className={`text-sm leading-relaxed ${
+                    msg.from === "client" ? "text-foreground" : "text-muted-light"
+                  }`}>
+                    {msg.text}
                   </p>
+
+                  {/* Read receipt for client messages */}
+                  {msg.from === "client" && (
+                    <div className="flex items-center justify-end gap-0.5 mt-1">
+                      <Check size={10} className="text-primary/50" />
+                      <Check size={10} className="text-primary/50 -ml-1.5" />
+                    </div>
+                  )}
                 </div>
-              </StaggerItem>
+              </motion.div>
             ))}
-          </StaggerContainer>
+
+            {/* Typing indicator at the end */}
+            <motion.div
+              className="flex justify-start"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.2 }}
+            >
+              <div className="bg-surface-alt/80 border border-[var(--border-light)] rounded-2xl rounded-bl-md px-4 py-3">
+                <div className="flex items-center gap-1">
+                  <motion.div
+                    className="h-1.5 w-1.5 rounded-full bg-muted-light"
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+                  />
+                  <motion.div
+                    className="h-1.5 w-1.5 rounded-full bg-muted-light"
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+                  />
+                  <motion.div
+                    className="h-1.5 w-1.5 rounded-full bg-muted-light"
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Chat input bar */}
+          <div className="px-5 py-3 border-t border-[var(--border-light)] bg-surface/30">
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-10 rounded-xl bg-background/60 border border-[var(--border-light)] px-4 flex items-center">
+                <span className="text-sm text-muted">Type your idea here...</span>
+              </div>
+              <a
+                href="#contact"
+                className="h-10 px-5 rounded-xl bg-primary text-background font-semibold text-sm flex items-center gap-1.5 hover:bg-primary-dark transition-colors glow-cyan-hover"
+              >
+                Start Chat
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

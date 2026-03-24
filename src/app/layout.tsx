@@ -1,23 +1,36 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, DM_Sans } from "next/font/google";
+import { Outfit, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-heading",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-body",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tinkerhive.com"),
+  alternates: {
+    canonical: "/",
+  },
   title: "TinkerHive — We Tinker. You Thrive.",
   description:
-    "Websites, apps, cloud infrastructure, and DevOps handcrafted by senior engineers. Serving businesses in the US, Canada, EU, Middle East, and Australia.",
+    "We build your product, launch it, and keep it running. Software development, cloud infrastructure, and DevOps — all under one roof. Serving businesses worldwide.",
   keywords: [
     "web development",
     "app development",
@@ -25,7 +38,6 @@ export const metadata: Metadata = {
     "private cloud",
     "DevOps consulting",
     "platform engineering",
-    "open source",
     "AWS",
     "Kubernetes",
     "Terraform",
@@ -33,16 +45,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TinkerHive — We Tinker. You Thrive.",
     description:
-      "Websites, apps, cloud infrastructure, and DevOps handcrafted by senior engineers.",
+      "We build your product, launch it, and keep it running. Software development and DevOps under one roof.",
     url: "https://tinkerhive.com",
     siteName: "TinkerHive",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TinkerHive — Built to Launch. Built to Last.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "TinkerHive — We Tinker. You Thrive.",
     description:
-      "Websites, apps, cloud infrastructure, and DevOps handcrafted by senior engineers.",
+      "We build your product, launch it, and keep it running. Software development and DevOps under one roof.",
   },
   robots: {
     index: true,
@@ -59,9 +79,26 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${outfit.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body suppressHydrationWarning className="min-h-full flex flex-col font-body">
+      <body suppressHydrationWarning className="grain min-h-full flex flex-col font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "TinkerHive",
+              url: "https://tinkerhive.com",
+              description: "We build your product, launch it, and keep it running. Software development, cloud infrastructure, and DevOps — all under one roof.",
+              areaServed: ["US", "CA", "EU", "AE", "AU"],
+              serviceType: ["Software Development", "DevOps", "Cloud Infrastructure", "Platform Engineering"],
+            }),
+          }}
+        />
+        <a href="#main-content" className="skip-to-content">
+          Skip to content
+        </a>
         {children}
       </body>
     </html>

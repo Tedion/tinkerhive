@@ -28,7 +28,17 @@ const slideRight: Variants = {
   visible: { opacity: 1, x: 0 },
 };
 
-const variants = { fadeUp, fadeIn, scaleIn, slideLeft, slideRight };
+const blurIn: Variants = {
+  hidden: { opacity: 0, filter: "blur(12px)" },
+  visible: { opacity: 1, filter: "blur(0px)" },
+};
+
+const rotateIn: Variants = {
+  hidden: { opacity: 0, rotate: -6, scale: 0.95 },
+  visible: { opacity: 1, rotate: 0, scale: 1 },
+};
+
+const variants = { fadeUp, fadeIn, scaleIn, slideLeft, slideRight, blurIn, rotateIn };
 
 type AnimationType = keyof typeof variants;
 
@@ -66,7 +76,7 @@ export default function AnimateIn({
 export function StaggerContainer({
   children,
   className,
-  stagger = 0.1,
+  stagger = 0.08,
 }: {
   children: ReactNode;
   className?: string;
@@ -88,13 +98,15 @@ export function StaggerContainer({
 export function StaggerItem({
   children,
   className,
+  variant = "fadeUp",
 }: {
   children: ReactNode;
   className?: string;
+  variant?: AnimationType;
 }) {
   return (
     <motion.div
-      variants={fadeUp}
+      variants={variants[variant]}
       transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
       className={className}
     >

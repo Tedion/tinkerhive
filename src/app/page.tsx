@@ -1,6 +1,10 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
+import Showcase from "@/components/Showcase";
+import CloudProviders from "@/components/CloudProviders";
+import PrivateCloud from "@/components/PrivateCloud";
+import DevOpsSection from "@/components/DevOpsSection";
+import SecuritySection from "@/components/SecuritySection";
 import HowItWorks from "@/components/HowItWorks";
 import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
@@ -13,9 +17,13 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main-content">
         <Hero />
-        <Services />
+        <Showcase />
+        <CloudProviders />
+        <PrivateCloud />
+        <DevOpsSection />
+        <SecuritySection />
         <HowItWorks />
         <About />
         <Testimonials />
