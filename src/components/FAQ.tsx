@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import AnimateIn, { StaggerContainer, StaggerItem } from "./AnimateIn";
 
 const faqs = [
   {
@@ -44,49 +46,59 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-20 sm:py-28 bg-surface">
       <div className="mx-auto max-w-3xl px-6">
-        <div className="text-center">
+        <AnimateIn className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Frequently asked questions
           </h2>
           <p className="mt-4 text-lg text-muted">
             Everything you need to know before getting started.
           </p>
-        </div>
+        </AnimateIn>
 
-        <dl className="mt-12 space-y-4" role="list">
+        <StaggerContainer className="mt-12 space-y-3" stagger={0.06}>
           {faqs.map((faq, i) => (
-            <div
-              key={faq.q}
-              className="rounded-xl border border-border bg-white"
-            >
-              <dt>
+            <StaggerItem key={faq.q}>
+              <div className="rounded-xl border border-border bg-white overflow-hidden">
                 <button
-                  className="flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer"
+                  className="flex w-full items-center justify-between px-6 py-5 text-left cursor-pointer hover:bg-surface/50 transition-colors"
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   aria-expanded={openIndex === i}
                 >
                   <span className="text-sm font-semibold text-foreground pr-4">
                     {faq.q}
                   </span>
-                  <ChevronDown
-                    size={18}
-                    className={`shrink-0 text-muted transition-transform duration-200 ${
-                      openIndex === i ? "rotate-180" : ""
-                    }`}
-                    aria-hidden="true"
-                  />
+                  <motion.div
+                    animate={{ rotate: openIndex === i ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDown
+                      size={18}
+                      className="shrink-0 text-muted"
+                      aria-hidden="true"
+                    />
+                  </motion.div>
                 </button>
-              </dt>
-              {openIndex === i && (
-                <dd className="px-6 pb-5">
-                  <p className="text-sm text-muted leading-relaxed">
-                    {faq.a}
-                  </p>
-                </dd>
-              )}
-            </div>
+                <AnimatePresence>
+                  {openIndex === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-5">
+                        <p className="text-sm text-muted leading-relaxed">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </StaggerItem>
           ))}
-        </dl>
+        </StaggerContainer>
       </div>
     </section>
   );

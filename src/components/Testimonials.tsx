@@ -1,4 +1,8 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import AnimateIn, { StaggerContainer, StaggerItem } from "./AnimateIn";
 
 const testimonials = [
   {
@@ -31,59 +35,62 @@ export default function Testimonials() {
   return (
     <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="text-center">
+        <AnimateIn className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Trusted by businesses worldwide
           </h2>
           <p className="mt-4 text-lg text-muted max-w-2xl mx-auto">
             Don&apos;t take our word for it. Here&apos;s what our clients say.
           </p>
-        </div>
+        </AnimateIn>
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerContainer className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" stagger={0.12}>
           {testimonials.map((t) => (
-            <div
-              key={t.name}
-              className="rounded-2xl border border-border bg-white p-8 hover:shadow-lg transition-shadow"
-            >
-              {/* Stars */}
-              <div className="flex gap-1" aria-label={`${t.rating} out of 5 stars`}>
-                {Array.from({ length: t.rating }).map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    className="fill-accent text-accent"
+            <StaggerItem key={t.name}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="rounded-2xl border border-border bg-white p-8 hover:shadow-xl hover:border-primary/20 transition-all h-full"
+              >
+                {/* Stars */}
+                <div className="flex gap-1" aria-label={`${t.rating} out of 5 stars`}>
+                  {Array.from({ length: t.rating }).map((_, i) => (
+                    <Star
+                      key={i}
+                      size={16}
+                      className="fill-accent text-accent"
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+
+                <blockquote className="mt-4 text-sm text-foreground leading-relaxed">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+
+                <div className="mt-6 flex items-center gap-3">
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold text-sm"
                     aria-hidden="true"
-                  />
-                ))}
-              </div>
-
-              <blockquote className="mt-4 text-sm text-foreground leading-relaxed">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-
-              <div className="mt-6 flex items-center gap-3">
-                <div
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold text-sm"
-                  aria-hidden="true"
-                >
-                  {t.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+                  >
+                    {t.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      {t.name}
+                    </p>
+                    <p className="text-xs text-muted">
+                      {t.role} — {t.location}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    {t.name}
-                  </p>
-                  <p className="text-xs text-muted">
-                    {t.role} — {t.location}
-                  </p>
-                </div>
-              </div>
-            </div>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
