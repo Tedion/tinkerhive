@@ -2,15 +2,21 @@
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, Clock, MapPin } from "lucide-react";
+import { Send, Mail, Clock, MapPin, MessageCircle } from "lucide-react";
 import AnimateIn from "./AnimateIn";
 
 const contactInfo = [
   {
     icon: Mail,
     label: "Email us",
-    value: "hello@tinkerhive.com",
-    href: "mailto:hello@tinkerhive.com",
+    value: "tedionabera@gmail.com",
+    href: "mailto:tedionabera@gmail.com",
+  },
+  {
+    icon: MessageCircle,
+    label: "Quick response",
+    value: "DM on Twitter @DTedion",
+    href: "https://twitter.com/DTedion",
   },
   {
     icon: Clock,
@@ -39,13 +45,16 @@ export default function Contact() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <AnimateIn variant="slideLeft">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+              Get Started
+            </p>
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Let&apos;s build something{" "}
               <span className="text-primary">great together.</span>
             </h2>
             <p className="mt-4 text-lg text-muted">
               Tell us about your project and we&apos;ll get back to you within 24
-              hours with a free consultation.
+              hours with a free consultation and honest quote.
             </p>
 
             <div className="mt-10 space-y-6">
@@ -68,6 +77,8 @@ export default function Contact() {
                     {item.href ? (
                       <a
                         href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-base font-semibold text-foreground hover:text-primary transition-colors"
                       >
                         {item.value}
@@ -129,7 +140,7 @@ export default function Contact() {
                       htmlFor="email"
                       className="block text-sm font-medium text-foreground mb-1.5"
                     >
-                      Work email
+                      Email
                     </label>
                     <input
                       id="email"

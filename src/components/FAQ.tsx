@@ -8,11 +8,11 @@ import AnimateIn, { StaggerContainer, StaggerItem } from "./AnimateIn";
 const faqs = [
   {
     q: "How much does a website cost?",
-    a: "Simple business websites start at $2,500. E-commerce sites from $5,000. Custom web apps from $15,000. Every project gets a fixed-price quote upfront — no hourly billing surprises.",
+    a: "Simple business websites start at $800. E-commerce sites from $1,200. Custom web apps from $2,500. Every project gets a fixed-price quote upfront — no hourly billing surprises.",
   },
   {
     q: "How long does a project take?",
-    a: "A business website: 2-3 weeks. A web app MVP: 4-8 weeks. Cloud infrastructure setup: 1-2 weeks. We'll give you a specific timeline in your proposal.",
+    a: "A business website: 1-3 weeks. A web app MVP: 4-8 weeks. Cloud infrastructure setup: 1-2 weeks. We'll give you a specific timeline in your proposal.",
   },
   {
     q: "Do I need to sign a long-term contract?",
@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "Who actually does the work?",
-    a: "You work directly with senior engineers. We don't outsource or hand off to juniors. The person on your discovery call is the person writing your code.",
+    a: "You work directly with a senior Full-Stack DevOps engineer with 8+ years of experience. We don't outsource or hand off to juniors. The person on your discovery call is the person writing your code.",
   },
   {
     q: "Where are you based?",
@@ -28,15 +28,15 @@ const faqs = [
   },
   {
     q: "Can you manage my existing cloud infrastructure?",
-    a: "Yes. We manage AWS, GCP, and Azure environments. We'll audit your current setup, optimize costs, improve security, and provide ongoing monitoring — typically saving 20-40% on cloud bills.",
+    a: "Yes. We manage AWS, GCP, and Azure environments. We'll audit your current setup, optimize costs, improve security, and provide ongoing monitoring — typically saving 20-40% on cloud bills. Retainers start at $300/month.",
   },
   {
     q: "Do I own the code?",
-    a: "100% yes. All code, designs, and infrastructure configurations are yours. We also use open-source tools wherever possible so you're never locked into proprietary platforms.",
+    a: "100% yes. All code, designs, and infrastructure configurations are yours. We use open-source tools wherever possible so you're never locked into proprietary platforms.",
   },
   {
     q: "What if something breaks after launch?",
-    a: "All projects include 30 days of free bug-fix support post-launch. After that, our support retainers start at $500/month for ongoing maintenance, monitoring, and improvements.",
+    a: "All projects include 14 days of free bug-fix support post-launch. After that, our support retainers start at $50/month for basic maintenance and go up depending on scope.",
   },
 ];
 
@@ -47,6 +47,9 @@ export default function FAQ() {
     <section id="faq" className="py-20 sm:py-28 bg-surface">
       <div className="mx-auto max-w-3xl px-6">
         <AnimateIn className="text-center">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+            FAQ
+          </p>
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Frequently asked questions
           </h2>

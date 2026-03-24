@@ -44,6 +44,9 @@ export default function HowItWorks() {
     <section id="how-it-works" className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <AnimateIn className="text-center">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+            Our Process
+          </p>
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             How it works
           </h2>

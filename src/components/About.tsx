@@ -8,7 +8,7 @@ const differentiators = [
   "You talk to the senior engineer — always. No bait-and-switch.",
   "Fixed pricing with no hidden fees. 50% upfront, 50% on delivery.",
   "Month-to-month support. No long-term lock-in contracts.",
-  "Cloud-native infrastructure from day one. Not fragile shared hosting.",
+  "Cloud-native infrastructure from day one — not fragile shared hosting.",
   "We speak your language — plain English, no unnecessary jargon.",
   "Open-source first. You own your code, your data, your infrastructure.",
 ];
@@ -16,11 +16,16 @@ const differentiators = [
 const stats = [
   { value: "50+", label: "Projects Delivered" },
   { value: "99.9%", label: "Uptime Guarantee" },
-  { value: "6", label: "Countries Served" },
-  { value: "<2hr", label: "Avg Response Time" },
+  { value: "8+", label: "Years Experience" },
+  { value: "<4hr", label: "Avg Response Time" },
 ];
 
-const badges = ["AWS", "GCP", "Kubernetes", "Terraform", "Docker"];
+const techStack = [
+  "AWS", "GCP", "Azure", "Kubernetes", "Docker",
+  "Terraform", "Ansible", "Prometheus", "Grafana",
+  "React", "Node.js", "Python", "Go",
+  "PostgreSQL", "MongoDB", "OpenStack", "Proxmox",
+];
 
 export default function About() {
   return (
@@ -28,20 +33,24 @@ export default function About() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           <AnimateIn variant="slideLeft">
+            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+              Why TinkerHive
+            </p>
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               Built by engineers,{" "}
               <span className="text-primary">for businesses.</span>
             </h2>
             <p className="mt-6 text-lg text-muted leading-relaxed">
-              TinkerHive is a global digital agency run by senior DevOps and
-              software engineers. We build websites, apps, and cloud
-              infrastructure for businesses across the US, Canada, Europe, Middle
-              East, and Australia.
+              TinkerHive is led by a Full-Stack DevOps &amp; Infrastructure Engineer
+              with 8+ years of experience designing scalable applications and
+              enterprise infrastructure — from building private clouds from
+              scratch to deploying production-grade Kubernetes clusters.
             </p>
             <p className="mt-4 text-lg text-muted leading-relaxed">
-              Unlike big agencies that assign junior developers to your project,
-              you work directly with the people who architect and build your
-              solution. No account managers. No middlemen.
+              We serve businesses across the US, Canada, Europe, Middle East, and
+              Australia. Unlike big agencies that assign junior developers to
+              your project, you work directly with the engineer who architects
+              and builds your solution. No middlemen. No surprises.
             </p>
 
             <ul className="mt-8 space-y-4" role="list">
@@ -93,20 +102,25 @@ export default function About() {
                 </div>
               </motion.div>
 
-              {/* Trust badges */}
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-                {badges.map((badge, i) => (
-                  <motion.span
-                    key={badge}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 + i * 0.06 }}
-                    className="rounded-lg border border-border bg-white px-4 py-2 text-xs font-semibold text-muted hover:border-primary/30 hover:text-primary transition-colors"
-                  >
-                    {badge}
-                  </motion.span>
-                ))}
+              {/* Tech stack cloud */}
+              <div className="mt-6">
+                <p className="text-xs font-semibold text-muted uppercase tracking-wider text-center mb-3">
+                  Our Tech Stack
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-2">
+                  {techStack.map((badge, i) => (
+                    <motion.span
+                      key={badge}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + i * 0.03 }}
+                      className="rounded-lg border border-border bg-white px-3 py-1.5 text-xs font-semibold text-muted hover:border-primary/30 hover:text-primary transition-colors"
+                    >
+                      {badge}
+                    </motion.span>
+                  ))}
+                </div>
               </div>
             </div>
           </AnimateIn>
