@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { FaGithub, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import Logo from "./Logo";
 
 const serviceLinks = [
   "Web Development",
@@ -64,13 +65,8 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16">
         {/* Top — Logo + Tagline */}
         <div className="mb-12">
-          <Link href="/" className="inline-flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00b4d8] text-lg font-bold text-white">
-              T
-            </div>
-            <span className="text-xl font-bold text-[#f1f5f9]">
-              Tinker<span className="text-[#00b4d8]">Hive</span>
-            </span>
+          <Link href="/">
+            <Logo variant="hex" theme="dark" size={36} />
           </Link>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#94a3b8]">
             We tinker. You thrive. Websites, apps, and cloud infrastructure

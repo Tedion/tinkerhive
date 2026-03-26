@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Logo from "./Logo";
 
 const navLinks = [
   { label: "Our Work", href: "#work" },
@@ -91,13 +92,8 @@ export default function Header() {
         aria-label="Main navigation"
       >
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5" aria-label="TinkerHive home">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00b4d8] text-lg font-bold text-white">
-            T
-          </div>
-          <span className={["text-xl font-bold transition-colors duration-300", scrolled ? "text-[#0f172a]" : "text-[#f1f5f9]"].join(" ")}>
-            Tinker<span className="text-[#00b4d8]">Hive</span>
-          </span>
+        <a href="#" aria-label="TinkerHive home">
+          <Logo variant="hex" theme={scrolled ? "light" : "dark"} size={36} />
         </a>
 
         {/* Desktop Nav — centered links */}
