@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { GitFork, MessageCircle, Mail } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Mail } from "lucide-react";
+import { FaGithub, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 
 const serviceLinks = [
   "Web Development",
@@ -20,6 +20,13 @@ const companyLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+const resourceLinks = [
+  { label: "Documentation", href: "#" },
+  { label: "Blog", href: "#" },
+  { label: "Case Studies", href: "#work" },
+  { label: "Support", href: "#contact" },
+];
+
 const regions = [
   "United States",
   "Canada",
@@ -32,12 +39,17 @@ const socialLinks = [
   {
     label: "GitHub",
     href: "https://github.com/Tedion",
-    icon: GitFork,
+    icon: FaGithub,
   },
   {
-    label: "Twitter",
+    label: "X (Twitter)",
     href: "https://twitter.com/DTedion",
-    icon: MessageCircle,
+    icon: FaTwitter,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/company/tinkerhive",
+    icon: FaLinkedinIn,
   },
   {
     label: "Email",
@@ -48,55 +60,37 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--border-light)] bg-surface">
-      <div className="mx-auto max-w-7xl px-6 py-14">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
-          {/* Column 1 — Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="group flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary font-display text-lg font-bold text-background">
-                T
-              </div>
-              <span className="font-display text-xl font-bold text-foreground">
-                Tinker<span className="text-primary">Hive</span>
-              </span>
-            </Link>
-            <p className="mt-3 text-sm leading-relaxed text-muted-light">
-              We tinker. You thrive. Websites, apps, and cloud infrastructure
-              handcrafted by senior engineers.
-            </p>
-
-            {/* Social icons */}
-            <div className="mt-5 flex items-center gap-3">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className={cn(
-                    "glass flex h-9 w-9 items-center justify-center rounded-full",
-                    "text-muted-light transition-colors duration-200 hover:text-primary"
-                  )}
-                >
-                  <link.icon size={18} />
-                </a>
-              ))}
+    <footer className="bg-[#0f172a]">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        {/* Top — Logo + Tagline */}
+        <div className="mb-12">
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#00b4d8] text-lg font-bold text-white">
+              T
             </div>
-          </div>
+            <span className="text-xl font-bold text-[#f1f5f9]">
+              Tinker<span className="text-[#00b4d8]">Hive</span>
+            </span>
+          </Link>
+          <p className="mt-3 max-w-sm text-sm leading-relaxed text-[#94a3b8]">
+            We tinker. You thrive. Websites, apps, and cloud infrastructure
+            handcrafted by senior engineers.
+          </p>
+        </div>
 
-          {/* Column 2 — Services */}
+        {/* Link Columns Grid */}
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
+          {/* Services */}
           <div>
-            <h3 className="font-sans text-sm font-semibold text-foreground">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#f1f5f9]">
               Services
             </h3>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 space-y-3">
               {serviceLinks.map((service) => (
                 <li key={service}>
                   <Link
                     href="#services"
-                    className="text-sm text-muted-light transition-colors hover:text-foreground"
+                    className="text-sm text-[#94a3b8] transition-colors duration-200 hover:text-[#f1f5f9]"
                   >
                     {service}
                   </Link>
@@ -105,17 +99,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3 — Company */}
+          {/* Company */}
           <div>
-            <h3 className="font-sans text-sm font-semibold text-foreground">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#f1f5f9]">
               Company
             </h3>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-light transition-colors hover:text-foreground"
+                    className="text-sm text-[#94a3b8] transition-colors duration-200 hover:text-[#f1f5f9]"
                   >
                     {link.label}
                   </Link>
@@ -124,16 +118,35 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 — Regions */}
+          {/* Resources */}
           <div>
-            <h3 className="font-sans text-sm font-semibold text-foreground">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#f1f5f9]">
+              Resources
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {resourceLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-[#94a3b8] transition-colors duration-200 hover:text-[#f1f5f9]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Regions */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#f1f5f9]">
               Regions
             </h3>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 space-y-3">
               {regions.map((region) => (
                 <li
                   key={region}
-                  className="text-sm text-muted-light"
+                  className="text-sm text-[#94a3b8]"
                 >
                   {region}
                 </li>
@@ -142,24 +155,43 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--border-light)] pt-8 sm:flex-row">
-          <p className="text-sm text-muted-light">
-            &copy; {new Date().getFullYear()} TinkerHive. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <Link
-              href="/privacy"
-              className="text-sm text-muted-light transition-colors hover:text-foreground"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-sm text-muted-light transition-colors hover:text-foreground"
-            >
-              Terms of Service
-            </Link>
+        {/* Bottom Bar */}
+        <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-[#1e293b] pt-8 sm:flex-row">
+          {/* Copyright + Legal */}
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
+            <p className="text-sm text-[#94a3b8]">
+              &copy; {new Date().getFullYear()} TinkerHive. All rights reserved.
+            </p>
+            <div className="flex gap-4">
+              <Link
+                href="/privacy"
+                className="text-sm text-[#94a3b8] transition-colors duration-200 hover:text-[#f1f5f9]"
+              >
+                Privacy
+              </Link>
+              <Link
+                href="/terms"
+                className="text-sm text-[#94a3b8] transition-colors duration-200 hover:text-[#f1f5f9]"
+              >
+                Terms
+              </Link>
+            </div>
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex items-center gap-4">
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+                className="flex h-8 w-8 items-center justify-center rounded text-[#94a3b8] transition-colors duration-200 hover:text-[#f1f5f9]"
+              >
+                <link.icon size={18} />
+              </a>
+            ))}
           </div>
         </div>
       </div>

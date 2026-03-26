@@ -1,11 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Check } from "lucide-react";
 import AnimateIn from "./AnimateIn";
 import type { IconType } from "react-icons";
-import { SiGooglecloud, SiKubernetes, SiDocker, SiTerraform, SiAnsible, SiPrometheus, SiGrafana, SiNodedotjs, SiPython, SiGo, SiPostgresql, SiMongodb, SiOpenstack, SiProxmox, SiNginx, SiRedis } from "react-icons/si";
+import {
+  SiGooglecloud,
+  SiKubernetes,
+  SiDocker,
+  SiTerraform,
+  SiAnsible,
+  SiPrometheus,
+  SiGrafana,
+  SiNodedotjs,
+  SiPython,
+  SiGo,
+  SiPostgresql,
+  SiMongodb,
+  SiOpenstack,
+  SiProxmox,
+  SiNginx,
+  SiRedis,
+} from "react-icons/si";
 import { FaAws, FaMicrosoft, FaReact, FaLinux } from "react-icons/fa";
 
 const differentiators = [
@@ -49,28 +64,25 @@ const techStack: { name: string; icon?: IconType }[] = [
 
 export default function About() {
   return (
-    <section id="about" className="py-20 sm:py-28 bg-surface">
+    <section id="about" className="section-gray py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6">
         {/* Section header */}
-        <AnimateIn className="mb-16">
-          <p className="font-mono text-sm text-primary tracking-wider mb-3">
-            // ABOUT
-          </p>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            One Team.{" "}
-            <span className="gradient-text">The Whole Journey.</span>
+        <AnimateIn variant="fadeUp" className="mb-16">
+          <span className="section-label">ABOUT</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-[#0f172a]">
+            One Team. The Whole Journey.
           </h2>
         </AnimateIn>
 
-        {/* 60/40 split layout */}
-        <div className="grid gap-12 grid-cols-1 lg:grid-cols-5 lg:gap-16 items-start">
-          {/* Left column — 60% (col-span-3) */}
-          <AnimateIn variant="slideLeft" className="lg:col-span-3">
-            <p className="text-lg text-muted-light leading-relaxed">
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+          {/* Left column — description + bullet points */}
+          <AnimateIn variant="fadeUp" delay={0.1} className="lg:col-span-3">
+            <p className="text-lg leading-relaxed text-[#475569]">
               Most agencies build your product and hand you the keys. Then
-              something breaks at 2 AM and you&apos;re on your own. TinkerHive is
+              something breaks at 2&nbsp;AM and you&apos;re on your own. TinkerHive is
               different. We&apos;re a software development and DevOps firm that
-              owns your entire product lifecycle &mdash; from writing the first
+              owns your entire product lifecycle&nbsp;&mdash; from writing the first
               line of code to launching it live and keeping it running every day
               after. Founded by an engineer who&apos;s done it all, we don&apos;t
               hand off. We stay.
@@ -78,81 +90,54 @@ export default function About() {
 
             {/* Differentiators checklist */}
             <ul className="mt-10 space-y-4" role="list">
-              {differentiators.map((item, i) => (
-                <motion.li
-                  key={item}
-                  className="flex items-start gap-3"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.4 }}
-                >
-                  <CheckCircle2
-                    size={20}
-                    className="mt-0.5 shrink-0 text-primary"
-                    aria-hidden="true"
-                  />
-                  <span className="text-foreground text-sm font-medium">
+              {differentiators.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] border border-[#00b4d8]">
+                    <Check size={14} className="text-[#00b4d8]" strokeWidth={2.5} />
+                  </span>
+                  <span className="text-[#0f172a] text-sm font-medium leading-relaxed">
                     {item}
                   </span>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </AnimateIn>
 
-          {/* Right column — 40% (col-span-2) */}
-          <AnimateIn variant="slideRight" className="lg:col-span-2">
-            <div className="relative">
-              {/* Stats glass card */}
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="glass rounded-2xl p-8"
-              >
-                <div className="grid grid-cols-2 gap-8">
-                  {stats.map((stat, i) => (
-                    <motion.div
-                      key={stat.label}
-                      className="text-center"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 + i * 0.1 }}
-                    >
-                      <p className="text-primary text-3xl font-extrabold font-display">
-                        {stat.value}
-                      </p>
-                      <p className="mt-1 text-sm text-muted-light">
-                        {stat.label}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+          {/* Right column — Stats card + Tech stack */}
+          <AnimateIn variant="fadeUp" delay={0.2} className="lg:col-span-2">
+            {/* Stats card */}
+            <div className="card">
+              <div className="grid grid-cols-2 divide-x divide-y divide-[#e2e8f0]">
+                {stats.map((stat) => (
+                  <div key={stat.label} className="text-center px-4 py-5">
+                    <p className="text-3xl font-bold font-display text-[#00b4d8] tabular-nums">
+                      {stat.value}
+                    </p>
+                    <p className="mt-1 text-sm text-[#64748b]">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-              {/* Tech stack badges cloud */}
-              <div className="mt-6">
-                <p className="font-mono text-xs text-muted uppercase tracking-wider text-center mb-4">
-                  Our Tech Stack
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  {techStack.map((badge, i) => (
-                    <motion.span
-                      key={badge.name}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + i * 0.03 }}
-                      className={cn(
-                        "flex items-center gap-1.5 glass rounded-lg px-3 py-1.5 font-mono text-xs text-muted-light",
-                        "hover:border-primary hover:text-primary transition-colors cursor-default"
-                      )}
-                    >
-                      {badge.icon && <badge.icon size={12} />}
-                      {badge.name}
-                    </motion.span>
-                  ))}
-                </div>
+            {/* Tech stack */}
+            <div className="mt-8">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#94a3b8] mb-4">
+                Our Tech Stack
+              </p>
+              <div className="grid grid-cols-4 gap-3">
+                {techStack.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="flex flex-col items-center gap-1.5 rounded-lg border border-[#e2e8f0] bg-white px-2 py-3 text-center transition-all duration-200 hover:border-[#00b4d8]/40 hover:scale-105"
+                  >
+                    {tech.icon && (
+                      <tech.icon size={24} className="text-[#475569]" />
+                    )}
+                    <span className="text-[10px] font-medium text-[#475569] leading-tight">
+                      {tech.name}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </AnimateIn>

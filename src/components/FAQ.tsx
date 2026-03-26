@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import AnimateIn from "./AnimateIn";
 
 const faqs = [
@@ -45,66 +44,49 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="relative bg-background py-20 sm:py-28">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/3 left-1/4 h-[400px] w-[400px] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/3 h-[300px] w-[300px] rounded-full bg-secondary/5 blur-[120px]" />
-      </div>
+    <section id="faq" className="bg-[#f8fafc] py-20 sm:py-28">
       <div className="mx-auto max-w-3xl px-6">
         <AnimateIn variant="fadeUp" className="text-center">
-          <p className="font-mono text-sm font-semibold uppercase tracking-wider text-primary">
-            // FAQ
+          <p className="text-sm font-semibold uppercase tracking-wider text-[#94a3b8]">
+            FAQ
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#0f172a] sm:text-4xl">
             Frequently Asked Questions
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-light">
+          <p className="mx-auto mt-4 max-w-xl text-lg text-[#475569]">
             Everything you need to know before getting started.
           </p>
         </AnimateIn>
 
-        <div className="mt-12 space-y-3">
-          {faqs.map((faq, i) => (
-            <motion.div
-              key={faq.q}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-            >
+        <p className="mt-2 text-sm text-[#94a3b8] text-center">{faqs.length} questions answered</p>
+        <div className="mt-12 divide-y divide-[#e2e8f0]">
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+
+            return (
               <div
-                className={cn(
-                  "glass overflow-hidden rounded-xl transition-colors duration-200",
-                  openIndex === i && "border-primary/30"
-                )}
+                key={faq.q}
+                className={`relative rounded-lg transition-colors duration-200 hover:bg-[#f1f5f9] ${isOpen ? "border-l-[3px] border-[#00b4d8] bg-[#f8fafc]" : "border-l-[3px] border-transparent"}`}
               >
                 <button
-                  className="flex w-full cursor-pointer items-center justify-between px-6 py-5 text-left transition-colors hover:bg-white/[0.02]"
-                  onClick={() =>
-                    setOpenIndex(openIndex === i ? null : i)
-                  }
-                  aria-expanded={openIndex === i}
+                  className="flex w-full cursor-pointer items-center justify-between py-5 pl-5 pr-4 text-left"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  aria-expanded={isOpen}
                   id={`faq-button-${i}`}
                   aria-controls={`faq-panel-${i}`}
                 >
-                  <span className="pr-4 font-sans text-sm font-semibold text-foreground">
+                  <span className="pr-4 text-sm font-semibold text-[#0f172a]">
                     {faq.q}
                   </span>
-                  <motion.div
-                    animate={{ rotate: openIndex === i ? 180 : 0 }}
-                    transition={{ duration: 0.25, ease: "easeInOut" }}
-                    className="shrink-0"
-                  >
-                    <ChevronDown
-                      size={18}
-                      className="text-muted-light"
-                      aria-hidden="true"
-                    />
-                  </motion.div>
+                  <ChevronDown
+                    size={18}
+                    className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180 text-[#00b4d8]" : "rotate-0 text-[#94a3b8]"}`}
+                    aria-hidden="true"
+                  />
                 </button>
 
                 <AnimatePresence initial={false}>
-                  {openIndex === i && (
+                  {isOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -115,8 +97,8 @@ export default function FAQ() {
                       role="region"
                       aria-labelledby={`faq-button-${i}`}
                     >
-                      <div className="px-6 pb-5">
-                        <p className="text-sm leading-relaxed text-muted-light">
+                      <div className="pb-6 pl-5 pr-6 pt-1">
+                        <p className="text-sm leading-relaxed text-[#475569]">
                           {faq.a}
                         </p>
                       </div>
@@ -124,8 +106,8 @@ export default function FAQ() {
                   )}
                 </AnimatePresence>
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import TrustedBy from "@/components/TrustedBy";
 import Showcase from "@/components/Showcase";
 import CloudProviders from "@/components/CloudProviders";
 import PrivateCloud from "@/components/PrivateCloud";
@@ -19,6 +20,7 @@ export default function Home() {
       <Header />
       <main id="main-content">
         <Hero />
+        <TrustedBy />
         <Showcase />
         <CloudProviders />
         <PrivateCloud />

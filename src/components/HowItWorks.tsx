@@ -1,202 +1,118 @@
 "use client";
 
+import { MessageSquare, FileCode, Rocket, Headphones } from "lucide-react";
 import { motion } from "framer-motion";
-import { MessageSquare, FileCode, Rocket, Headphones, Check } from "lucide-react";
 import AnimateIn from "./AnimateIn";
 
-interface Message {
-  from: "client" | "tinkerhive";
-  text: string;
-  step?: {
-    number: string;
-    title: string;
-    timeline: string;
-    icon: typeof MessageSquare;
-  };
-  delay: number;
-}
-
-const conversation: Message[] = [
+const steps = [
   {
-    from: "client",
-    text: "Hey, I have an idea for an app. Where do I start?",
-    delay: 0,
+    number: "01",
+    title: "Tell Us Your Idea",
+    timeline: "Day 1",
+    icon: MessageSquare,
+    description:
+      "Let\u2019s hop on a free call. Tell us everything \u2014 we\u2019ll figure out the best path forward together.",
   },
   {
-    from: "tinkerhive",
-    text: "Let's hop on a free call. Tell us everything — we'll figure out the best path forward together.",
-    step: { number: "01", title: "Tell Us Your Idea", timeline: "Day 1", icon: MessageSquare },
-    delay: 0.15,
+    number: "02",
+    title: "We Plan It",
+    timeline: "Day 2\u20133",
+    icon: FileCode,
+    description:
+      "We send you a clear plan \u2014 what we\u2019ll build, how long it takes, and what it costs. No surprises.",
   },
   {
-    from: "client",
-    text: "Sounds good. What happens after the call?",
-    delay: 0.3,
+    number: "03",
+    title: "We Build & Launch",
+    timeline: "Week 1\u20136",
+    icon: Rocket,
+    description:
+      "You\u2019ll see progress every week. We build it, test it, and take it live \u2014 you give feedback along the way.",
   },
   {
-    from: "tinkerhive",
-    text: "We send you a clear plan — what we'll build, how long it takes, and what it costs. No surprises.",
-    step: { number: "02", title: "We Plan It", timeline: "Day 2-3", icon: FileCode },
-    delay: 0.45,
-  },
-  {
-    from: "client",
-    text: "And then you start building?",
-    delay: 0.6,
-  },
-  {
-    from: "tinkerhive",
-    text: "Exactly. You'll see progress every week. We build it, test it, and take it live — you give feedback along the way.",
-    step: { number: "03", title: "We Build & Launch", timeline: "Week 1-6", icon: Rocket },
-    delay: 0.75,
-  },
-  {
-    from: "client",
-    text: "What about after launch? What if something breaks?",
-    delay: 0.9,
-  },
-  {
-    from: "tinkerhive",
-    text: "We don't disappear. We monitor your product 24/7, fix issues fast, and scale it as you grow. We stay.",
-    step: { number: "04", title: "We Keep It Running", timeline: "Ongoing", icon: Headphones },
-    delay: 1.05,
+    number: "04",
+    title: "We Keep It Running",
+    timeline: "Ongoing",
+    icon: Headphones,
+    description:
+      "We don\u2019t disappear. We monitor your product 24/7, fix issues fast, and scale it as you grow. We stay.",
   },
 ];
 
-function StepBadge({ step }: { step: NonNullable<Message["step"]> }) {
-  const Icon = step.icon;
-  return (
-    <div className="flex items-center gap-3 mb-2 mt-1">
-      <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/15 border border-primary/20">
-        <Icon className="w-4 h-4 text-primary" />
-      </div>
-      <div>
-        <div className="flex items-center gap-2">
-          <span className="font-display text-lg font-bold text-primary">{step.number}</span>
-          <span className="font-display text-sm font-semibold text-foreground">{step.title}</span>
-        </div>
-        <span className="font-mono text-[10px] text-primary/70 tracking-wider">{step.timeline}</span>
-      </div>
-    </div>
-  );
-}
-
 export default function HowItWorks() {
   return (
-    <section id="process" className="relative py-24 sm:py-32 overflow-hidden">
-      <div className="mx-auto max-w-3xl px-6">
+    <section id="process" className="section-light py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6">
         {/* Header */}
-        <AnimateIn variant="fadeUp" className="text-center mb-16">
-          <p className="font-mono text-sm text-muted-light tracking-widest uppercase mb-3">
-            // PROCESS
-          </p>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground">
-            How It <span className="gradient-text">Works</span>
+        <AnimateIn variant="fadeUp" className="text-center mb-20">
+          <span className="section-label">PROCESS</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-[#0f172a]">
+            How It Works
           </h2>
-          <p className="mt-4 text-muted-light max-w-lg mx-auto">
-            From first conversation to a live product — here&apos;s what working with us looks like.
+          <p className="mt-4 text-lg text-[#475569] max-w-xl mx-auto">
+            From first conversation to a live product
           </p>
         </AnimateIn>
 
-        {/* Chat window */}
-        <div className="glass rounded-2xl border border-[var(--border-light)] overflow-hidden">
-          {/* Chat header */}
-          <div className="flex items-center gap-3 px-5 py-3 border-b border-[var(--border-light)] bg-surface/50">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary font-display text-sm font-bold text-background">
-              T
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-foreground">TinkerHive</p>
-              <div className="flex items-center gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-                <span className="text-[11px] text-muted-light">Online — typically replies instantly</span>
-              </div>
-            </div>
-          </div>
+        {/* Timeline — horizontal on desktop, vertical on mobile */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ staggerChildren: 0.15 }}
+          className="relative max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6"
+        >
+          {/* Connecting line — desktop only, runs behind step circles */}
+          <div
+            className="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-0.5"
+            style={{ background: "linear-gradient(to right, #e2e8f0, #00b4d8, #e2e8f0)" }}
+            aria-hidden="true"
+          />
 
-          {/* Messages */}
-          <div className="p-5 space-y-4">
-            {conversation.map((msg, i) => (
+          {steps.map((step) => {
+            const Icon = step.icon;
+            return (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16, scale: 0.97 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: msg.delay, duration: 0.35, ease: "easeOut" }}
-                className={`flex ${msg.from === "client" ? "justify-end" : "justify-start"}`}
+                key={step.number}
+                variants={{
+                  hidden: { opacity: 0, y: 24 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                className="relative"
               >
-                <div
-                  className={`max-w-[80%] sm:max-w-[70%] ${
-                    msg.from === "client"
-                      ? "bg-primary/15 border border-primary/20 rounded-2xl rounded-br-md"
-                      : "bg-surface-alt/80 border border-[var(--border-light)] rounded-2xl rounded-bl-md"
-                  } px-4 py-3`}
-                >
-                  {/* Step badge for TinkerHive messages */}
-                  {msg.step && <StepBadge step={msg.step} />}
+                <div className="flex flex-col items-center text-center px-4 rounded-xl py-6 transition-all duration-200 hover:shadow-md cursor-default">
+                  {/* Step number — circle badge */}
+                  <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-[#f0f9ff] border-2 border-[#00b4d8] transition-all duration-200">
+                    <span className="font-bold text-[#00b4d8] text-sm">
+                      {step.number}
+                    </span>
+                  </div>
 
-                  <p className={`text-sm leading-relaxed ${
-                    msg.from === "client" ? "text-foreground" : "text-muted-light"
-                  }`}>
-                    {msg.text}
+                  {/* Icon */}
+                  <div className="mt-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#00b4d8]/10">
+                    <Icon size={24} className="text-[#00b4d8]" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="mt-4 font-display text-lg font-semibold text-[#0f172a]">
+                    {step.title}
+                  </h3>
+
+                  {/* Timeline badge — pill style */}
+                  <span className="mt-2 inline-block rounded-full bg-[#f0f9ff] text-[#0369a1] text-xs font-medium px-3 py-1">
+                    {step.timeline}
+                  </span>
+
+                  {/* Description */}
+                  <p className="mt-3 text-sm leading-relaxed text-[#475569] max-w-[240px]">
+                    {step.description}
                   </p>
-
-                  {/* Read receipt for client messages */}
-                  {msg.from === "client" && (
-                    <div className="flex items-center justify-end gap-0.5 mt-1">
-                      <Check size={10} className="text-primary/50" />
-                      <Check size={10} className="text-primary/50 -ml-1.5" />
-                    </div>
-                  )}
                 </div>
               </motion.div>
-            ))}
-
-            {/* Typing indicator at the end */}
-            <motion.div
-              className="flex justify-start"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 1.2 }}
-            >
-              <div className="bg-surface-alt/80 border border-[var(--border-light)] rounded-2xl rounded-bl-md px-4 py-3">
-                <div className="flex items-center gap-1">
-                  <motion.div
-                    className="h-1.5 w-1.5 rounded-full bg-muted-light"
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, repeat: Infinity, delay: 0 }}
-                  />
-                  <motion.div
-                    className="h-1.5 w-1.5 rounded-full bg-muted-light"
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                  />
-                  <motion.div
-                    className="h-1.5 w-1.5 rounded-full bg-muted-light"
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Chat input bar */}
-          <div className="px-5 py-3 border-t border-[var(--border-light)] bg-surface/30">
-            <div className="flex items-center gap-3">
-              <div className="flex-1 h-10 rounded-xl bg-background/60 border border-[var(--border-light)] px-4 flex items-center">
-                <span className="text-sm text-muted">Type your idea here...</span>
-              </div>
-              <a
-                href="#contact"
-                className="h-10 px-5 rounded-xl bg-primary text-background font-semibold text-sm flex items-center gap-1.5 hover:bg-primary-dark transition-colors glow-cyan-hover"
-              >
-                Start Chat
-              </a>
-            </div>
-          </div>
-        </div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

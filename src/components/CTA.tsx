@@ -1,34 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import AnimateIn from "./AnimateIn";
 
 export default function CTA() {
   return (
-    <section className="relative w-full overflow-hidden py-20 sm:py-28 bg-surface">
-      {/* Subtle gradient glow — matches site palette */}
-      <div className="absolute inset-0 -z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full bg-primary/8 blur-[150px]" />
-        <div className="absolute bottom-0 right-1/4 h-[300px] w-[400px] rounded-full bg-secondary/5 blur-[120px]" />
-      </div>
-
-      {/* Grid pattern overlay */}
-      <div className="grid-pattern absolute inset-0 opacity-[0.03]" />
-
-      {/* Top and bottom border accents */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-
-      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-        <AnimateIn variant="scaleIn">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground md:text-5xl">
-            Ready to turn your idea into a{" "}
-            <span className="gradient-text">product that lasts?</span>
+    <section className="relative w-full bg-[#0f172a] py-24 sm:py-32 overflow-hidden">
+      {/* Radial gradient overlay */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: "radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, transparent 70%)",
+        }}
+      />
+      {/* Decorative grid dots */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+      {/* Decorative ring */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-white/[0.03]" />
+      <div className="relative mx-auto max-w-3xl px-6 text-center">
+        <AnimateIn variant="fadeUp">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            Ready to turn your idea into a product that lasts?
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-light">
+
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[#94a3b8]">
             Book a free 30-minute call. Tell us what you&apos;re building, and
             we&apos;ll show you exactly how we&apos;d take it from concept to
             launch — and keep it running after.
@@ -37,25 +39,18 @@ export default function CTA() {
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="#contact"
-              className={cn(
-                "group inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-3.5",
-                "text-base font-semibold text-background",
-                "glow-cyan hover:bg-primary-dark hover:scale-[1.02] transition-all duration-200"
-              )}
+              className="group inline-flex items-center gap-2 rounded-lg bg-[#00b4d8] px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-[#0096b7] hover:scale-105 hover:shadow-[0_0_20px_rgba(0,180,216,0.3)]"
             >
               Book a Free Call
               <ArrowRight
                 size={18}
-                className="transition-transform group-hover:translate-x-1"
+                className="transition-transform duration-200 group-hover:translate-x-1"
               />
             </Link>
+
             <Link
               href="#about"
-              className={cn(
-                "inline-flex items-center gap-2 rounded-xl border border-[var(--border-light)] px-7 py-3.5",
-                "text-base font-semibold text-foreground",
-                "hover:border-primary/40 hover:bg-surface-alt transition-all duration-200"
-              )}
+              className="inline-flex items-center gap-2 rounded-lg border border-[#334155] px-7 py-3.5 text-base font-semibold text-[#f1f5f9] transition-colors duration-200 hover:border-[#94a3b8] hover:text-white"
             >
               Learn More
             </Link>
