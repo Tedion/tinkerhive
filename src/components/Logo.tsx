@@ -3,22 +3,18 @@
 /**
  * TinkerHive Logo — SVG React component
  *
- * Three visual concepts built into one file.
- * Usage: <Logo variant="hex" theme="dark" size={36} />
- *
  * variant:
- *   "hex"    — Hexagon icon with circuit-node dots (recommended)
- *   "wrench" — Stylized wrench forming a T inside a rounded square
+ *   "hex"    — Hexagon with circuit T-H monogram (recommended, default)
  *   "text"   — Wordmark only, no icon
  *
  * theme:
- *   "dark"   — White text, cyan accent (for dark hero / dark footer)
- *   "light"  — Navy text, cyan accent (for white/gray header)
- *   "color"  — Full color, works on any bg
+ *   "dark"   — White/cyan on dark backgrounds (hero, footer)
+ *   "light"  — Navy/cyan on light backgrounds (scrolled header)
+ *   "color"  — Full color, any background
  */
 
 interface LogoProps {
-  variant?: "hex" | "wrench" | "text";
+  variant?: "hex" | "text";
   theme?: "dark" | "light" | "color";
   size?: number;
   className?: string;
@@ -29,69 +25,45 @@ const CYAN = "#00b4d8";
 const NAVY = "#0f172a";
 const WHITE = "#f1f5f9";
 
-// ─── Concept A: Hexagon with inner circuit nodes ─────────────────────────────
+// ─── New Icon: Hexagon with stylised circuit "T" ──────────────────────────────
 function HexIcon({ size, theme }: { size: number; theme: "dark" | "light" | "color" }) {
-  const fill = theme === "dark" ? NAVY : theme === "light" ? WHITE : WHITE;
-  const stroke = CYAN;
-  const nodeFill = CYAN;
-  const innerStroke = theme === "dark" ? "rgba(0,180,216,0.35)" : "rgba(0,180,216,0.5)";
+  const hexFill = CYAN;
+  const innerBg = theme === "light" ? "#0369a1" : NAVY;
+  const markColor = WHITE;
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 40 40"
+      viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
       {/* Outer hexagon */}
       <polygon
-        points="20,2 35.5,11 35.5,29 20,38 4.5,29 4.5,11"
-        fill={stroke}
+        points="24,2 42,12 42,36 24,46 6,36 6,12"
+        fill={hexFill}
       />
-      {/* Inner hexagon (cut-out effect) */}
+      {/* Inner hexagon — cutout bg */}
       <polygon
-        points="20,7.5 30.5,13.25 30.5,24.75 20,30.5 9.5,24.75 9.5,13.25"
-        fill={theme === "color" ? NAVY : theme === "dark" ? NAVY : "#0369a1"}
+        points="24,8 37,15.5 37,30.5 24,38 11,30.5 11,15.5"
+        fill={innerBg}
       />
-      {/* Center dot */}
-      <circle cx="20" cy="19" r="2.5" fill={nodeFill} />
-      {/* Three circuit lines radiating from center */}
-      <line x1="20" y1="16.5" x2="20" y2="9.5" stroke={nodeFill} strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="17.8" y1="20.2" x2="11.8" y2="23.5" stroke={nodeFill} strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="22.2" y1="20.2" x2="28.2" y2="23.5" stroke={nodeFill} strokeWidth="1.5" strokeLinecap="round" />
-      {/* Node dots at line ends */}
-      <circle cx="20" cy="9" r="1.8" fill={nodeFill} />
-      <circle cx="11.2" cy="24" r="1.8" fill={nodeFill} />
-      <circle cx="28.8" cy="24" r="1.8" fill={nodeFill} />
-    </svg>
-  );
-}
 
-// ─── Concept B: Bold "T" inside rounded square with gear corner detail ───────
-function WrenchIcon({ size, theme }: { size: number; theme: "dark" | "light" | "color" }) {
-  const bg = CYAN;
-  const fg = theme === "light" ? WHITE : WHITE;
+      {/* Circuit T mark — horizontal bar */}
+      <rect x="15" y="17" width="18" height="3" rx="1.5" fill={markColor} />
+      {/* Vertical stem */}
+      <rect x="22.5" y="20" width="3" height="11" rx="1.5" fill={markColor} />
 
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 40 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/* Background rounded square */}
-      <rect x="1" y="1" width="38" height="38" rx="10" fill={bg} />
-      {/* Bold T letterform */}
-      <rect x="8" y="10" width="24" height="5" rx="2" fill={fg} />
-      <rect x="17" y="15" width="6" height="15" rx="2" fill={fg} />
-      {/* Tiny gear-tooth detail at bottom-right */}
-      <rect x="28" y="28" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.35)" />
-      <rect x="25" y="31" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.35)" />
-      <rect x="31" y="31" width="3" height="3" rx="0.5" fill="rgba(255,255,255,0.35)" />
+      {/* Node dots — circuit endpoints */}
+      <circle cx="15" cy="18.5" r="2" fill={CYAN} />
+      <circle cx="33" cy="18.5" r="2" fill={CYAN} />
+      <circle cx="24" cy="31" r="2" fill={CYAN} />
+
+      {/* Tiny connection lines to corners */}
+      <line x1="15" y1="18.5" x2="11" y2="24" stroke={CYAN} strokeWidth="1" strokeOpacity="0.6" />
+      <line x1="33" y1="18.5" x2="37" y2="24" stroke={CYAN} strokeWidth="1" strokeOpacity="0.6" />
     </svg>
   );
 }
@@ -110,9 +82,7 @@ export default function Logo({
   return (
     <span className={`inline-flex items-center gap-2.5 select-none ${className}`}>
       {variant !== "text" && (
-        variant === "hex"
-          ? <HexIcon size={size} theme={theme} />
-          : <WrenchIcon size={size} theme={theme} />
+        <HexIcon size={size} theme={theme} />
       )}
       {showText && (
         <span
@@ -134,26 +104,25 @@ export default function Logo({
 
 /**
  * Standalone SVG export for favicon / OG image generation
- * Usage: import { TinkerHiveSVG } from "@/components/Logo"
  */
-export function TinkerHiveSVG({ size = 40 }: { size?: number }) {
+export function TinkerHiveSVG({ size = 48 }: { size?: number }) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 40 40"
+      viewBox="0 0 48 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <polygon points="20,2 35.5,11 35.5,29 20,38 4.5,29 4.5,11" fill="#00b4d8" />
-      <polygon points="20,7.5 30.5,13.25 30.5,24.75 20,30.5 9.5,24.75 9.5,13.25" fill="#0f172a" />
-      <circle cx="20" cy="19" r="2.5" fill="#00b4d8" />
-      <line x1="20" y1="16.5" x2="20" y2="9.5" stroke="#00b4d8" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="17.8" y1="20.2" x2="11.8" y2="23.5" stroke="#00b4d8" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="22.2" y1="20.2" x2="28.2" y2="23.5" stroke="#00b4d8" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="20" cy="9" r="1.8" fill="#00b4d8" />
-      <circle cx="11.2" cy="24" r="1.8" fill="#00b4d8" />
-      <circle cx="28.8" cy="24" r="1.8" fill="#00b4d8" />
+      <polygon points="24,2 42,12 42,36 24,46 6,36 6,12" fill="#00b4d8" />
+      <polygon points="24,8 37,15.5 37,30.5 24,38 11,30.5 11,15.5" fill="#0f172a" />
+      <rect x="15" y="17" width="18" height="3" rx="1.5" fill="#f1f5f9" />
+      <rect x="22.5" y="20" width="3" height="11" rx="1.5" fill="#f1f5f9" />
+      <circle cx="15" cy="18.5" r="2" fill="#00b4d8" />
+      <circle cx="33" cy="18.5" r="2" fill="#00b4d8" />
+      <circle cx="24" cy="31" r="2" fill="#00b4d8" />
+      <line x1="15" y1="18.5" x2="11" y2="24" stroke="#00b4d8" strokeWidth="1" strokeOpacity="0.6" />
+      <line x1="33" y1="18.5" x2="37" y2="24" stroke="#00b4d8" strokeWidth="1" strokeOpacity="0.6" />
     </svg>
   );
 }

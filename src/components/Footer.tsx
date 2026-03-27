@@ -17,17 +17,19 @@ const serviceLinks = [
 ];
 
 const companyLinks = [
-  { label: "About", href: "#about" },
-  { label: "How It Works", href: "#process" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Careers", href: "/careers" },
+  { label: "How It Works", href: "/#process" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const resourceLinks = [
-  { label: "Documentation", href: "#" },
-  { label: "Blog", href: "#" },
-  { label: "Case Studies", href: "#work" },
-  { label: "Support", href: "#contact" },
+  { label: "Blog & Insights", href: "/blog" },
+  { label: "Case Studies", href: "/#work" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
 ];
 
 const regions = [

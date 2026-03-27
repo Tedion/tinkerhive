@@ -126,7 +126,7 @@ function LogoCard({ client }: { client: Client }) {
       href={client.url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={client.name}
+      aria-label={`${client.name} — ${client.sector}`}
     >
       {content}
     </a>
@@ -137,7 +137,7 @@ export default function TrustedBy() {
   return (
     <section className="bg-[#f8fafc] py-16 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 mb-10">
-        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[#94a3b8]">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[#64748b]">
           Companies &amp; organizations we&apos;ve worked with
         </p>
       </div>

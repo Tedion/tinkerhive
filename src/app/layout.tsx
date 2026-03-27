@@ -28,27 +28,37 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "TinkerHive — We Tinker. You Thrive.",
+  title: {
+    default: "TinkerHive — Software Engineering, DevOps & Cloud Infrastructure",
+    template: "%s | TinkerHive",
+  },
   description:
-    "We build your product, launch it, and keep it running. Software development, cloud infrastructure, and DevOps — all under one roof. Serving businesses worldwide.",
+    "TinkerHive is a founder-led software engineering and DevOps firm. We build your product, launch it, and keep it running — all under one roof. Serving clients across the US, EU, Middle East, and beyond.",
   keywords: [
-    "web development",
-    "app development",
-    "cloud management",
-    "private cloud",
+    "software development company",
     "DevOps consulting",
+    "cloud infrastructure",
+    "Kubernetes managed services",
     "platform engineering",
-    "AWS",
-    "Kubernetes",
-    "Terraform",
+    "web application development",
+    "mobile app development",
+    "AI engineering",
+    "private cloud setup",
+    "AWS managed services",
+    "software development Ethiopia",
+    "DevOps engineer Addis Ababa",
+    "cloud architecture consulting",
+    "full stack development",
+    "24/7 managed operations",
   ],
   openGraph: {
-    title: "TinkerHive — We Tinker. You Thrive.",
+    title: "TinkerHive — Software Engineering, DevOps & Cloud Infrastructure",
     description:
-      "We build your product, launch it, and keep it running. Software development and DevOps under one roof.",
+      "Founder-led engineering firm. We build your product, launch it, and keep it running — all under one roof. 10+ projects delivered across 4 continents.",
     url: "https://tinkerhive.com",
     siteName: "TinkerHive",
     type: "website",
+    locale: "en_US",
     images: [
       {
         url: "/og-image.png",
@@ -60,14 +70,22 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TinkerHive — We Tinker. You Thrive.",
+    title: "TinkerHive — Software Engineering, DevOps & Cloud Infrastructure",
     description:
-      "We build your product, launch it, and keep it running. Software development and DevOps under one roof.",
+      "Founder-led engineering firm. We build, launch, and keep your product running. 10+ projects across 4 continents.",
+    creator: "@DTedion",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+    },
   },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -85,15 +103,59 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              name: "TinkerHive",
-              url: "https://tinkerhive.com",
-              description: "We build your product, launch it, and keep it running. Software development, cloud infrastructure, and DevOps — all under one roof.",
-              areaServed: ["US", "CA", "EU", "AE", "AU"],
-              serviceType: ["Software Development", "DevOps", "Cloud Infrastructure", "Platform Engineering"],
-            }),
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "@id": "https://tinkerhive.com/#organization",
+                name: "TinkerHive",
+                url: "https://tinkerhive.com",
+                logo: "https://tinkerhive.com/icon.png",
+                description: "Founder-led software engineering and DevOps firm. We build, launch, and maintain software products for businesses worldwide.",
+                email: "hello@tinkerhive.dev",
+                foundingDate: "2025",
+                founder: {
+                  "@type": "Person",
+                  name: "Teddy Abera",
+                  jobTitle: "Founder & Lead Engineer",
+                },
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Addis Ababa",
+                  addressCountry: "ET",
+                },
+                areaServed: ["US", "CA", "GB", "DE", "CH", "AE", "AU", "NZ", "ET"],
+                sameAs: [
+                  "https://github.com/Tedion",
+                  "https://twitter.com/DTedion",
+                  "https://linkedin.com/company/tinkerhive",
+                ],
+                hasOfferCatalog: {
+                  "@type": "OfferCatalog",
+                  name: "Engineering Services",
+                  itemListElement: [
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Software Development" } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "DevOps & Platform Engineering" } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cloud Infrastructure Management" } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI Engineering & MLOps" } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "24/7 Managed Operations" } },
+                  ],
+                },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": "https://tinkerhive.com/#website",
+                url: "https://tinkerhive.com",
+                name: "TinkerHive",
+                publisher: { "@id": "https://tinkerhive.com/#organization" },
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: { "@type": "EntryPoint", urlTemplate: "https://tinkerhive.com/?q={search_term_string}" },
+                  "query-input": "required name=search_term_string",
+                },
+              },
+            ]),
           }}
         />
         <a href="#main-content" className="skip-to-content">

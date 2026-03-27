@@ -3,40 +3,25 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import Logo from "./Logo";
 
 const navLinks = [
-  { label: "Our Work", href: "#work" },
-  { label: "AI", href: "#ai" },
-  { label: "Cloud", href: "#cloud" },
-  { label: "DevOps", href: "#devops" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/services" },
+  { label: "Our Work", href: "/#work" },
+  { label: "AI", href: "/#ai" },
+  { label: "About", href: "/about" },
+  { label: "Careers", href: "/careers" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      const sections = navLinks.map((l) => l.href.slice(1));
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) {
-            setActiveSection(sections[i]);
-            return;
-          }
-        }
-      }
-      setActiveSection("");
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -93,52 +78,42 @@ export default function Header() {
         aria-label="Main navigation"
       >
         {/* Logo */}
-        <a href="#" aria-label="TinkerHive home">
+        <Link href="/" aria-label="TinkerHive home">
           <Logo variant="hex" theme={scrolled ? "light" : "dark"} size={36} />
-        </a>
+        </Link>
 
-        {/* Desktop Nav — centered links */}
-        <div className="hidden lg:flex items-center gap-8">
+        {/* Desktop Nav */}
+        <div className="hidden lg:flex items-center gap-7">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className={[
-                "relative text-sm font-medium transition-colors duration-200",
-                activeSection === link.href.slice(1)
-                  ? "text-[#00b4d8]"
-                  : scrolled
-                    ? "text-[#475569] hover:text-[#00b4d8]"
-                    : "text-[#f1f5f9] hover:text-[#00b4d8]",
+                "text-sm font-medium transition-colors duration-200",
+                scrolled
+                  ? "text-[#475569] hover:text-[#00b4d8]"
+                  : "text-[#f1f5f9] hover:text-[#00b4d8]",
               ].join(" ")}
             >
               {link.label}
-              <span
-                className={[
-                  "absolute -bottom-1 left-0 h-0.5 bg-[#00b4d8] transition-transform duration-300 origin-left w-full",
-                  activeSection === link.href.slice(1)
-                    ? "scale-x-100"
-                    : "scale-x-0",
-                ].join(" ")}
-              />
-            </a>
+            </Link>
           ))}
         </div>
 
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center gap-3">
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className={["rounded-md border px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-[#00b4d8] hover:text-[#00b4d8]", scrolled ? "border-[#e2e8f0] text-[#0f172a] hover:bg-[#f8fafc]" : "border-white/20 text-[#f1f5f9]"].join(" ")}
           >
             Contact Us
-          </a>
-          <a
-            href="#contact"
-            className="rounded-md bg-[#00b4d8] px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-[#0096b7]"
+          </Link>
+          <Link
+            href="/#contact"
+            className="rounded-md bg-[#00b4d8] px-4 py-2 text-sm font-semibold text-[#0f172a] transition-all duration-300 hover:bg-[#0096b7]"
           >
             Get Started
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Hamburger */}
@@ -171,46 +146,36 @@ export default function Header() {
               className="flex min-h-screen flex-col items-start justify-center gap-6 px-10"
             >
               {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ delay: i * 0.05, duration: 0.3 }}
-                  className={[
-                    "text-2xl font-semibold transition-colors duration-200",
-                    activeSection === link.href.slice(1)
-                      ? "text-[#00b4d8]"
-                      : "text-[#0f172a]",
-                  ].join(" ")}
-                >
-                  {link.label}
-                </motion.a>
+                <motion.div key={link.href} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ delay: i * 0.05, duration: 0.3 }}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="text-2xl font-semibold text-[#0f172a] hover:text-[#00b4d8] transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
 
               <div className="mt-6 flex flex-col gap-3 w-full max-w-xs">
-                <motion.a
-                  href="#contact"
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.3 }}
-                  className="rounded-md border border-[#e2e8f0] px-6 py-3 text-center text-sm font-medium text-[#0f172a] transition-colors duration-200 hover:border-[#00b4d8] hover:text-[#00b4d8]"
-                >
-                  Contact Us
-                </motion.a>
-                <motion.a
-                  href="#contact"
-                  onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35, duration: 0.3 }}
-                  className="rounded-md bg-[#00b4d8] px-6 py-3 text-center text-sm font-medium text-white transition-colors duration-200 hover:bg-[#0096b7]"
-                >
-                  Get Started
-                </motion.a>
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.3 }}>
+                  <Link
+                    href="/#contact"
+                    onClick={() => setMobileOpen(false)}
+                    className="block rounded-md border border-[#e2e8f0] px-6 py-3 text-center text-sm font-medium text-[#0f172a] transition-colors duration-200 hover:border-[#00b4d8] hover:text-[#00b4d8]"
+                  >
+                    Contact Us
+                  </Link>
+                </motion.div>
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.3 }}>
+                  <Link
+                    href="/#contact"
+                    onClick={() => setMobileOpen(false)}
+                    className="block rounded-md bg-[#00b4d8] px-6 py-3 text-center text-sm font-semibold text-[#0f172a] transition-colors duration-200 hover:bg-[#0096b7]"
+                  >
+                    Get Started
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>

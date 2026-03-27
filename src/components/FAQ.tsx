@@ -58,7 +58,7 @@ export default function FAQ() {
           </p>
         </AnimateIn>
 
-        <p className="mt-2 text-sm text-[#94a3b8] text-center">{faqs.length} questions answered</p>
+        <p className="mt-2 text-sm text-[#64748b] text-center">{faqs.length} questions answered</p>
         <div className="mt-12 divide-y divide-[#e2e8f0]">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
