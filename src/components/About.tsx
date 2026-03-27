@@ -20,6 +20,18 @@ import {
   SiProxmox,
   SiNginx,
   SiRedis,
+  SiOpenai,
+  SiAnthropic,
+  SiLangchain,
+  SiN8N,
+  SiHuggingface,
+  SiPytorch,
+  SiTensorflow,
+  SiOllama,
+  SiFlutter,
+  SiKotlin,
+  SiSwift,
+  SiExpo,
 } from "react-icons/si";
 import { FaAws, FaMicrosoft, FaReact, FaLinux } from "react-icons/fa";
 
@@ -60,6 +72,19 @@ const techStack: { name: string; icon?: IconType }[] = [
   { name: "Linux", icon: FaLinux },
   { name: "Nginx", icon: SiNginx },
   { name: "Redis", icon: SiRedis },
+  { name: "OpenAI", icon: SiOpenai },
+  { name: "Anthropic", icon: SiAnthropic },
+  { name: "LangChain", icon: SiLangchain },
+  { name: "n8n", icon: SiN8N },
+  { name: "HuggingFace", icon: SiHuggingface },
+  { name: "PyTorch", icon: SiPytorch },
+  { name: "TensorFlow", icon: SiTensorflow },
+  { name: "Ollama", icon: SiOllama },
+  { name: "Flutter", icon: SiFlutter },
+  { name: "React Native", icon: FaReact },
+  { name: "Swift", icon: SiSwift },
+  { name: "Kotlin", icon: SiKotlin },
+  { name: "Expo", icon: SiExpo },
 ];
 
 export default function About() {
