@@ -95,7 +95,7 @@ export default function CareersPage() {
         <section className="bg-white py-24">
           <div className="mx-auto max-w-7xl px-6">
             <div className="mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-3">Why Work Here</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Why Work Here</p>
               <h2 className="text-3xl font-bold text-[#0f172a]">What makes TinkerHive different</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -113,7 +113,7 @@ export default function CareersPage() {
         <section className="bg-[#f8fafc] py-24">
           <div className="mx-auto max-w-7xl px-6">
             <div className="mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-3">Open Roles</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Open Roles</p>
               <h2 className="text-3xl font-bold text-[#0f172a]">Current openings</h2>
               <p className="mt-3 text-[#475569]">
                 Don&apos;t see your role? Email us anyway at{" "}
@@ -167,7 +167,7 @@ export default function CareersPage() {
         <section className="bg-white py-20">
           <div className="mx-auto max-w-7xl px-6">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-3">Our Hiring Process</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Our Hiring Process</p>
               <h2 className="text-3xl font-bold text-[#0f172a] mb-8">Simple. Fast. Honest.</h2>
               <div className="space-y-6">
                 {[

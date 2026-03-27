@@ -189,11 +189,13 @@ h1, h2, h3 {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  /* #0369a1 passes 4.5:1 contrast on white and #f8fafc */
+  color: #0369a1;
   display: inline-block;
   margin-bottom: 1rem;
 }
 .section-dark .section-label {
+  /* cyan passes on dark backgrounds */
   color: var(--color-primary);
 }
 

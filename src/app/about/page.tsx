@@ -120,7 +120,7 @@ export default function AboutPage() {
           <div className="mx-auto max-w-7xl px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-3">Our Mission</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Our Mission</p>
                 <h2 className="text-3xl font-bold text-[#0f172a] mb-4">
                   Build great software. Keep it running. Never disappear.
                 </h2>
@@ -136,7 +136,7 @@ export default function AboutPage() {
                 </p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-3">Our Vision</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Our Vision</p>
                 <h2 className="text-3xl font-bold text-[#0f172a] mb-4">
                   The most trusted engineering partner for ambitious builders.
                 </h2>
@@ -158,7 +158,7 @@ export default function AboutPage() {
         <section className="bg-[#f8fafc] py-24">
           <div className="mx-auto max-w-7xl px-6">
             <div className="mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-3">Core Values</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Core Values</p>
               <h2 className="text-3xl font-bold text-[#0f172a]">What we stand for</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -181,7 +181,7 @@ export default function AboutPage() {
         <section className="bg-white py-24">
           <div className="mx-auto max-w-7xl px-6">
             <div className="mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-3">Our Story</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Our Story</p>
               <h2 className="text-3xl font-bold text-[#0f172a]">8 years in the making</h2>
             </div>
             <div className="relative max-w-3xl">
@@ -191,7 +191,7 @@ export default function AboutPage() {
                   <div key={m.year} className="relative flex gap-6 pl-8">
                     <div className="absolute left-0 top-1.5 h-3.5 w-3.5 rounded-full border-2 border-[#00b4d8] bg-white" />
                     <div>
-                      <span className="text-xs font-bold text-[#00b4d8] uppercase tracking-wider">{m.year}</span>
+                      <span className="text-xs font-bold text-[#0369a1] uppercase tracking-wider">{m.year}</span>
                       <p className="mt-1 text-[#475569] text-sm leading-relaxed">{m.event}</p>
                     </div>
                   </div>
