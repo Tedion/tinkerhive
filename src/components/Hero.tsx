@@ -43,7 +43,7 @@ export default function Hero() {
         >
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
           <span className="text-sm text-[#94a3b8]">
-            Software Development + DevOps + Ongoing Care
+            Software Engineering · DevOps · Managed Operations
           </span>
         </motion.div>
 
