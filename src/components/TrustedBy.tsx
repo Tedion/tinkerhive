@@ -138,7 +138,7 @@ export default function TrustedBy() {
     <section className="bg-[#f8fafc] py-16 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 mb-10">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[#94a3b8]">
-          Companies &amp; organizations I&apos;ve worked with
+          Companies &amp; organizations we&apos;ve worked with
         </p>
       </div>
 
