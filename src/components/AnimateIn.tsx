@@ -49,6 +49,7 @@ interface AnimateInProps {
   duration?: number;
   className?: string;
   once?: boolean;
+  threshold?: number;
 }
 
 export default function AnimateIn({
@@ -58,12 +59,18 @@ export default function AnimateIn({
   duration = 0.6,
   className,
   once = true,
+  threshold,
 }: AnimateInProps) {
+  // When threshold is set, don't use negative margin (avoids stuck animations)
+  const viewport = threshold !== undefined
+    ? { once, amount: threshold }
+    : { once, margin: "-80px" as const };
+
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: "-80px" }}
+      viewport={viewport}
       transition={{ duration, delay, ease: [0.25, 0.1, 0.25, 1] }}
       variants={variants[variant]}
       className={className}
