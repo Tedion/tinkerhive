@@ -30,7 +30,7 @@ const clients: Client[] = [
     label: "Centriweb",
     sector: "Dev Agency · Auckland NZ",
     url: "https://centriweb.com",
-    logo: null,
+    logo: "https://media.licdn.com/dms/image/v2/D560BAQHhpqV2F7JkXg/company-logo_200_200/company-logo_200_200/0/1719256417852?e=2147483647&v=beta&t=8VG2zJnTAVfOCwCFJbhgpODQDnoHC5-BPHytBYX2kaA",
   },
   {
     name: "OpenG2P",
@@ -65,28 +65,28 @@ const clients: Client[] = [
     label: "Siinqee Bank",
     sector: "Mobile Banking · Ethiopia",
     url: "#",
-    logo: null,
+    logo: "https://cdn.theorg.com/ece545cf-17a5-4233-a21e-cc19c92d76bb_medium.jpg",
   },
   {
     name: "Hijra Bank",
     label: "Hijra Bank",
     sector: "Mobile Banking · Ethiopia",
     url: "#",
-    logo: null,
+    logo: "https://hijra-bank.com/wp-content/uploads/2023/01/Logos-01.png",
   },
   {
     name: "Wegagen Bank",
     label: "Wegagen Bank",
     sector: "Mobile Banking · Ethiopia",
     url: "#",
-    logo: null,
+    logo: "https://cdn.theorg.com/9dac27b6-d420-4e77-9cdc-daf25db38556_medium.jpg",
   },
   {
     name: "Upwork",
     label: "Upwork",
     sector: "International Clients",
     url: "https://upwork.com",
-    logo: null,
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Upwork-logo.svg/320px-Upwork-logo.svg.png",
   },
 ];
 
