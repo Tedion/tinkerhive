@@ -179,12 +179,12 @@ export default function ServicesPage() {
           <section key={group.category} className="py-20 border-b border-[#e2e8f0] bg-white last:border-0">
             <div className="mx-auto max-w-7xl px-6">
               <div className="mb-10">
-                <span
-                  className="inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3"
-                  style={{ backgroundColor: `${group.accent}18`, color: group.accent }}
+                <h2
+                  className="inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3 text-[#0f172a]"
+                  style={{ backgroundColor: `${group.accent}22` }}
                 >
                   {group.category}
-                </span>
+                </h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {group.items.map((item) => (
