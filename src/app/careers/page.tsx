@@ -177,7 +177,7 @@ export default function CareersPage() {
                   { step: "04", title: "Offer", desc: "If it's a good fit, we move fast. You'll hear from us within a week of the first call." },
                 ].map((s) => (
                   <div key={s.step} className="flex gap-6">
-                    <span className="text-2xl font-bold text-[#94a3b8] shrink-0 w-8">{s.step}</span>
+                    <span className="text-2xl font-bold text-[#64748b] shrink-0 w-8">{s.step}</span>
                     <div>
                       <h3 className="font-semibold text-[#0f172a]">{s.title}</h3>
                       <p className="text-sm text-[#475569] mt-1">{s.desc}</p>
