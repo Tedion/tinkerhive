@@ -7,7 +7,7 @@ interface Client {
   label: string;
   sector: string;
   url: string;
-  logo: string | null; // actual logo URL scraped from their site
+  logo: string | null;
 }
 
 const clients: Client[] = [
@@ -30,7 +30,7 @@ const clients: Client[] = [
     label: "Centriweb",
     sector: "Dev Agency · Auckland NZ",
     url: "https://centriweb.com",
-    logo: null, // 403 on their CDN — text fallback
+    logo: null,
   },
   {
     name: "OpenG2P",
@@ -54,9 +54,9 @@ const clients: Client[] = [
     logo: "https://cdn.prod.website-files.com/655e88443b3fe4452ed66a24/655faf1101a7a0b1661481d1_nexustransparentlogo.webp",
   },
   {
-    name: "Poulta",
+    name: "Poulta Inc",
     label: "Poulta",
-    sector: "Agri-Tech · Ethiopia",
+    sector: "Agri-Tech · USA & Canada",
     url: "https://poulta.com",
     logo: "https://poulta.com/assets/images/logo.svg",
   },
@@ -86,30 +86,28 @@ const clients: Client[] = [
     label: "Upwork",
     sector: "International Clients",
     url: "https://upwork.com",
-    logo: null, // Upwork logo is trademarked — use text mark
+    logo: null,
   },
 ];
 
-// Duplicate for seamless infinite marquee
 const track = [...clients, ...clients];
 
 function LogoCard({ client }: { client: Client }) {
   const [imgError, setImgError] = useState(false);
+  const showImg = !!client.logo && !imgError;
 
-  const inner = (
-    <div className="group flex-shrink-0 flex flex-col items-center justify-center gap-2 rounded-xl border border-[#e2e8f0] bg-white px-6 py-4 h-[88px] min-w-[160px] max-w-[200px] transition-all duration-200 opacity-60 hover:opacity-100 hover:shadow-md hover:border-[#00b4d8]/40 select-none">
-      {client.logo && !imgError ? (
-        /* Real logo image */
+  const content = (
+    <div className="group flex-shrink-0 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-[#e2e8f0] bg-white px-6 py-4 h-[90px] min-w-[160px] max-w-[210px] transition-all duration-200 opacity-70 hover:opacity-100 hover:shadow-md hover:border-[#00b4d8]/50 select-none">
+      {showImg ? (
         <img
-          src={client.logo}
+          src={client.logo!}
           alt={client.name}
           onError={() => setImgError(true)}
-          className="h-8 w-auto max-w-[120px] object-contain grayscale group-hover:grayscale-0 transition-all duration-200"
+          className="h-9 w-auto max-w-[130px] object-contain"
           loading="lazy"
         />
       ) : (
-        /* Text fallback when no logo or img fails */
-        <span className="text-sm font-bold text-[#334155] leading-tight text-center">
+        <span className="text-sm font-bold text-[#1e293b] leading-tight text-center">
           {client.label}
         </span>
       )}
@@ -120,7 +118,7 @@ function LogoCard({ client }: { client: Client }) {
   );
 
   if (client.url === "#") {
-    return <div key={client.name} className="cursor-default">{inner}</div>;
+    return <div className="cursor-default">{content}</div>;
   }
 
   return (
@@ -129,9 +127,8 @@ function LogoCard({ client }: { client: Client }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={client.name}
-      className="cursor-pointer"
     >
-      {inner}
+      {content}
     </a>
   );
 }
@@ -145,7 +142,6 @@ export default function TrustedBy() {
         </p>
       </div>
 
-      {/* Marquee */}
       <div className="marquee-container">
         <div className="marquee-track flex items-center gap-5">
           {track.map((client, i) => (
