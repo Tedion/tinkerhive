@@ -2,12 +2,12 @@
 
 import { SiOpenstack, SiProxmox, SiRedhatopenshift } from "react-icons/si";
 import type { IconType } from "react-icons";
-import { Server } from "lucide-react";
 import AnimateIn, { StaggerContainer, StaggerItem } from "./AnimateIn";
 
 interface PlatformCard {
   name: string;
-  icon: IconType | typeof Server;
+  icon?: IconType;
+  logoUrl?: string;
   description: string;
   features: string[];
   iconBg: string;
@@ -37,7 +37,7 @@ const platforms: PlatformCard[] = [
   },
   {
     name: "Harvester",
-    icon: Server,
+    logoUrl: "https://harvesterhci.io/img/logo_horizontal.svg",
     description: "Modern HCI for Kubernetes-native infrastructure",
     features: ["VM Management", "Rancher Integration", "Storage (Longhorn)", "Cloud Provider Interface"],
     iconBg: "bg-green-50",
@@ -71,7 +71,11 @@ export default function PrivateCloud() {
                 >
                   {/* Icon */}
                   <div className="w-12 h-12 rounded-lg bg-[#f0f9ff] flex items-center justify-center mb-5">
-                    <Icon size={24} className="text-[#0f172a]" />
+                    {platform.logoUrl ? (
+                      <img src={platform.logoUrl} alt={platform.name} className="h-6 w-auto object-contain" />
+                    ) : Icon ? (
+                      <Icon size={24} className="text-[#0f172a]" />
+                    ) : null}
                   </div>
 
                   {/* Name */}
