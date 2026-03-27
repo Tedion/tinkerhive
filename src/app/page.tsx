@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustedBy from "@/components/TrustedBy";
 import Showcase from "@/components/Showcase";
+import AIServices from "@/components/AIServices";
 import CloudProviders from "@/components/CloudProviders";
 import PrivateCloud from "@/components/PrivateCloud";
 import DevOpsSection from "@/components/DevOpsSection";
@@ -22,6 +23,7 @@ export default function Home() {
         <Hero />
         <TrustedBy />
         <Showcase />
+        <AIServices />
         <CloudProviders />
         <PrivateCloud />
         <DevOpsSection />

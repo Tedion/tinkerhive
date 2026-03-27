@@ -8,6 +8,8 @@ import Logo from "./Logo";
 const serviceLinks = [
   "Web Development",
   "App Development",
+  "AI Development",
+  "AI Automation",
   "Cloud Management",
   "Private Cloud",
   "DevOps",
