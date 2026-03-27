@@ -1,13 +1,12 @@
 "use client";
 
-import { SiOpenstack, SiProxmox, SiRedhatopenshift } from "react-icons/si";
+import { SiOpenstack, SiProxmox, SiRedhatopenshift, SiRancher } from "react-icons/si";
 import type { IconType } from "react-icons";
 import AnimateIn, { StaggerContainer, StaggerItem } from "./AnimateIn";
 
 interface PlatformCard {
   name: string;
-  icon?: IconType;
-  logoUrl?: string;
+  icon: IconType;
   description: string;
   features: string[];
   iconBg: string;
@@ -37,7 +36,7 @@ const platforms: PlatformCard[] = [
   },
   {
     name: "Harvester",
-    logoUrl: "https://harvesterhci.io/img/logo_horizontal.svg",
+    icon: SiRancher,
     description: "Modern HCI for Kubernetes-native infrastructure",
     features: ["VM Management", "Rancher Integration", "Storage (Longhorn)", "Cloud Provider Interface"],
     iconBg: "bg-green-50",
@@ -64,6 +63,7 @@ export default function PrivateCloud() {
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6" stagger={0.1}>
           {platforms.map((platform) => {
             const Icon = platform.icon;
+
             return (
               <StaggerItem key={platform.name}>
                 <div
@@ -71,11 +71,7 @@ export default function PrivateCloud() {
                 >
                   {/* Icon */}
                   <div className="w-12 h-12 rounded-lg bg-[#f0f9ff] flex items-center justify-center mb-5">
-                    {platform.logoUrl ? (
-                      <img src={platform.logoUrl} alt={platform.name} className="h-6 w-auto object-contain" />
-                    ) : Icon ? (
-                      <Icon size={24} className="text-[#0f172a]" />
-                    ) : null}
+                    <Icon size={24} className="text-[#0f172a]" />
                   </div>
 
                   {/* Name */}
