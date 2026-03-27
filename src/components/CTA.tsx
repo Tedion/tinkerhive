@@ -25,7 +25,7 @@ export default function CTA() {
       {/* Decorative ring */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-white/[0.03]" />
       <div className="relative mx-auto max-w-3xl px-6 text-center">
-        <AnimateIn variant="fadeUp">
+        <AnimateIn variant="fadeUp" once={false}>
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             Ready to turn your idea into a product that lasts?
           </h2>
