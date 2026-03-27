@@ -213,7 +213,7 @@ export default function AboutPage() {
               </blockquote>
               <div>
                 <p className="font-semibold text-[#f1f5f9]">Teddy Abera</p>
-                <p className="text-sm text-[#64748b]">Founder & Lead Engineer, TinkerHive · Addis Ababa, Ethiopia</p>
+                <p className="text-sm text-[#94a3b8]">Founder & Lead Engineer, TinkerHive · Addis Ababa, Ethiopia</p>
               </div>
             </div>
           </div>
