@@ -117,7 +117,7 @@ export default function CareersPage() {
               <h2 className="text-3xl font-bold text-[#0f172a]">Current openings</h2>
               <p className="mt-3 text-[#475569]">
                 Don&apos;t see your role? Email us anyway at{" "}
-                <a href="mailto:hello@tinkerhive.dev" className="text-[#00b4d8] hover:underline font-medium">
+                <a href="mailto:hello@tinkerhive.dev" className="text-[#0369a1] hover:underline font-medium">
                   hello@tinkerhive.dev
                 </a>
                 {" "}— we hire for talent over titles.
@@ -147,7 +147,7 @@ export default function CareersPage() {
                   </div>
                   <p className="mt-4 text-[#475569] text-sm leading-relaxed">{role.description}</p>
                   <div className="mt-4">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[#94a3b8] mb-2">Requirements</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-[#64748b] mb-2">Requirements</p>
                     <ul className="space-y-1.5">
                       {role.requirements.map((r) => (
                         <li key={r} className="flex items-start gap-2 text-sm text-[#475569]">
@@ -177,7 +177,7 @@ export default function CareersPage() {
                   { step: "04", title: "Offer", desc: "If it's a good fit, we move fast. You'll hear from us within a week of the first call." },
                 ].map((s) => (
                   <div key={s.step} className="flex gap-6">
-                    <span className="text-2xl font-bold text-[#e2e8f0] shrink-0 w-8">{s.step}</span>
+                    <span className="text-2xl font-bold text-[#94a3b8] shrink-0 w-8">{s.step}</span>
                     <div>
                       <h3 className="font-semibold text-[#0f172a]">{s.title}</h3>
                       <p className="text-sm text-[#475569] mt-1">{s.desc}</p>
