@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 const services = [
   {
+    id: "software-development",
     category: "Software Development",
     accent: "#00b4d8",
     items: [
@@ -43,6 +44,7 @@ const services = [
     ],
   },
   {
+    id: "cloud-infrastructure",
     category: "Cloud & Infrastructure",
     accent: "#7c3aed",
     items: [
@@ -67,6 +69,7 @@ const services = [
     ],
   },
   {
+    id: "devops-platform-engineering",
     category: "DevOps & Platform Engineering",
     accent: "#10b981",
     items: [
@@ -91,6 +94,7 @@ const services = [
     ],
   },
   {
+    id: "ai-engineering",
     category: "AI Engineering",
     accent: "#a855f7",
     items: [
@@ -115,6 +119,7 @@ const services = [
     ],
   },
   {
+    id: "security",
     category: "Security",
     accent: "#ef4444",
     items: [
@@ -127,6 +132,7 @@ const services = [
     ],
   },
   {
+    id: "managed-operations",
     category: "Managed Operations",
     accent: "#f97316",
     items: [
@@ -176,7 +182,7 @@ export default function ServicesPage() {
 
         {/* Services */}
         {services.map((group) => (
-          <section key={group.category} className="py-20 border-b border-[#e2e8f0] bg-white last:border-0">
+          <section key={group.category} id={group.id} className="py-20 border-b border-[#e2e8f0] bg-white last:border-0">
             <div className="mx-auto max-w-7xl px-6">
               <div className="mb-10">
                 <h2
