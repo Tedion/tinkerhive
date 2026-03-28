@@ -43,7 +43,7 @@ const regions = [
 const socialLinks = [
   {
     label: "GitHub",
-    href: "https://github.com/Tedion",
+    href: "https://github.com/TinkerHive",
     icon: FaGithub,
   },
   {
@@ -53,7 +53,7 @@ const socialLinks = [
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/company/tinkerhive",
+    href: "https://www.linkedin.com/company/tinkerhive",
     icon: FaLinkedinIn,
   },
   {

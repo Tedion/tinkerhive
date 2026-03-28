@@ -126,9 +126,9 @@ export default function RootLayout({
                 },
                 areaServed: ["US", "CA", "GB", "DE", "CH", "AE", "AU", "NZ", "ET"],
                 sameAs: [
-                  "https://github.com/Tedion",
+                  "https://github.com/TinkerHive",
                   "https://twitter.com/DTedion",
-                  "https://linkedin.com/company/tinkerhive",
+                  "https://www.linkedin.com/company/tinkerhive",
                 ],
                 hasOfferCatalog: {
                   "@type": "OfferCatalog",
