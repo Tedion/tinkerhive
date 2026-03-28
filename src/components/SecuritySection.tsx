@@ -12,7 +12,7 @@ const securityBadges = [
   "WAF",
   "SIEM",
   "Zero Trust",
-  "SOC 2 & ISO 27001",
+  "CIS & OWASP Standards",
   "Vulnerability Scanning",
   "IAM & RBAC",
   "Secret Management",
@@ -24,14 +24,14 @@ const securityBadges = [
 /* ------------------------------------------------------------------ */
 
 const trustIndicators = [
-  "SOC 2 Type II Compliant",
-  "ISO 27001 Certified Processes",
-  "CIS Benchmarks",
+  "CIS Benchmark Hardening",
   "OWASP Top 10 Coverage",
-  "HashiCorp Vault",
-  "Terraform + OPA",
-  "Prometheus & Grafana",
-  "PagerDuty Incident Response",
+  "HashiCorp Vault Secrets Management",
+  "Terraform + OPA Policy as Code",
+  "Prometheus & Grafana Monitoring",
+  "Automated Vulnerability Scanning",
+  "Zero-Trust Network Architecture",
+  "Incident Response Runbooks",
 ];
 
 /* ================================================================== */
@@ -152,13 +152,7 @@ export default function SecuritySection() {
                 {trustIndicators.map((indicator) => (
                   <li
                     key={indicator}
-                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 -mx-3 transition-colors duration-200 cursor-default"
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                    }}
+                    className="flex items-center gap-3 rounded-lg px-3 py-2.5 -mx-3 transition-colors duration-200 hover:bg-white/[0.05]"
                   >
                     <span
                       className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"

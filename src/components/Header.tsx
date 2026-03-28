@@ -2,62 +2,50 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Code2, Cloud, Terminal, Brain, Shield, Headphones } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 
+/* ── Service categories for dropdown ─────────────────────────────────────── */
 const serviceCategories = [
   {
-    icon: Code2,
     label: "Software Development",
-    desc: "Web, mobile & backend apps",
+    sub: "Web, mobile & backend APIs",
     href: "/services#software-development",
-    accent: "#00b4d8",
   },
   {
-    icon: Cloud,
     label: "Cloud & Infrastructure",
-    desc: "AWS, GCP, private cloud",
+    sub: "AWS, GCP, Azure, private cloud",
     href: "/services#cloud-infrastructure",
-    accent: "#7c3aed",
   },
   {
-    icon: Terminal,
-    label: "DevOps & Platform",
-    desc: "CI/CD, IaC, Kubernetes",
+    label: "DevOps & Platform Engineering",
+    sub: "CI/CD, Kubernetes, IaC, observability",
     href: "/services#devops-platform-engineering",
-    accent: "#10b981",
   },
   {
-    icon: Brain,
     label: "AI Engineering",
-    desc: "LLMs, MLOps, automation",
+    sub: "LLM apps, RAG, MLOps, automation",
     href: "/services#ai-engineering",
-    accent: "#a855f7",
   },
   {
-    icon: Shield,
     label: "Security",
-    desc: "Zero-trust, Vault, Keycloak",
+    sub: "Zero-trust, Vault, SSO, hardening",
     href: "/services#security",
-    accent: "#ef4444",
   },
   {
-    icon: Headphones,
-    label: "24/7 Managed Ops",
-    desc: "Monitoring, SLA support",
+    label: "24/7 Managed Operations",
+    sub: "Round-the-clock monitoring & SLA",
     href: "/services#managed-operations",
-    accent: "#f97316",
   },
 ];
 
+/* ── Primary nav links — About is last ───────────────────────────────────── */
 const navLinks = [
-  { label: "Our Work", href: "/#work" },
-  { label: "AI", href: "/#ai" },
-  { label: "About", href: "/about" },
   { label: "Careers", href: "/careers" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/#contact" },
+  { label: "About", href: "/about" },
 ];
 
 export default function Header() {
@@ -65,6 +53,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -72,24 +61,28 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
         setServicesOpen(false);
       }
     }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setServicesOpen(false);
+    }
     document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Focus trap for mobile menu
   useEffect(() => {
     if (!mobileOpen) return;
     const overlay = document.querySelector("[data-mobile-menu]") as HTMLElement;
@@ -108,10 +101,21 @@ export default function Header() {
     return () => document.removeEventListener("keydown", trap);
   }, [mobileOpen]);
 
-  const linkClass = [
-    "text-sm font-medium transition-colors duration-200",
-    scrolled ? "text-[#475569] hover:text-[#00b4d8]" : "text-[#f1f5f9] hover:text-[#00b4d8]",
-  ].join(" ");
+  function isActive(href: string) {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  }
+
+  function navLinkClass(href: string) {
+    const active = isActive(href);
+    if (active) return "text-sm font-semibold text-[#00b4d8]";
+    return [
+      "text-sm font-medium transition-colors duration-200",
+      scrolled ? "text-[#475569] hover:text-[#00b4d8]" : "text-[#f1f5f9] hover:text-[#00b4d8]",
+    ].join(" ");
+  }
+
+  const isServicesActive = pathname.startsWith("/services");
 
   return (
     <header
@@ -123,18 +127,21 @@ export default function Header() {
       ].join(" ")}
     >
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4"
+        className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-4"
         aria-label="Main navigation"
       >
-        {/* Logo */}
+        {/* Logo — always links home */}
         <Link href="/" aria-label="TinkerHive home">
           <Logo variant="hex" theme={scrolled ? "light" : "dark"} size={36} />
         </Link>
 
-        {/* Desktop Nav */}
+        {/* ── Desktop Nav ─────────────────────────────────────────────────── */}
         <div className="hidden lg:flex items-center gap-7">
 
-          {/* Services dropdown */}
+          {/* Home */}
+          <Link href="/" className={navLinkClass("/")}>Home</Link>
+
+          {/* Services dropdown — IE Networks style vertical list */}
           <div
             ref={servicesRef}
             className="relative"
@@ -144,10 +151,12 @@ export default function Header() {
             <button
               onClick={() => setServicesOpen((v) => !v)}
               aria-expanded={servicesOpen}
-              aria-haspopup="true"
+              aria-haspopup="menu"
               className={[
-                "inline-flex items-center gap-1 text-sm font-medium transition-colors duration-200",
-                scrolled ? "text-[#475569] hover:text-[#00b4d8]" : "text-[#f1f5f9] hover:text-[#00b4d8]",
+                "inline-flex items-center gap-1 text-sm transition-colors duration-200",
+                isServicesActive
+                  ? "font-semibold text-[#00b4d8]"
+                  : `font-medium ${scrolled ? "text-[#475569] hover:text-[#00b4d8]" : "text-[#f1f5f9] hover:text-[#00b4d8]"}`,
               ].join(" ")}
             >
               Services
@@ -160,53 +169,47 @@ export default function Header() {
             <AnimatePresence>
               {servicesOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] rounded-2xl border border-[#e2e8f0] bg-white shadow-xl shadow-black/10 p-4"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 rounded-xl border border-[#e2e8f0] bg-white shadow-xl shadow-black/10 overflow-hidden"
                   role="menu"
                 >
-                  {/* Arrow */}
-                  <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white border-l border-t border-[#e2e8f0]" />
+                  {/* Caret */}
+                  <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-white border-l border-t border-[#e2e8f0]" />
 
-                  <div className="grid grid-cols-2 gap-1.5">
-                    {serviceCategories.map((cat) => {
-                      const Icon = cat.icon;
-                      return (
-                        <Link
-                          key={cat.label}
-                          href={cat.href}
-                          role="menuitem"
-                          onClick={() => setServicesOpen(false)}
-                          className="group flex items-start gap-3 rounded-xl p-3 transition-colors duration-150 hover:bg-[#f8fafc]"
-                        >
-                          <span
-                            className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
-                            style={{ backgroundColor: `${cat.accent}15` }}
-                          >
-                            <Icon size={16} style={{ color: cat.accent }} />
-                          </span>
-                          <span>
-                            <span className="block text-sm font-semibold text-[#0f172a] group-hover:text-[#00b4d8] transition-colors">
-                              {cat.label}
-                            </span>
-                            <span className="block text-xs text-[#64748b] mt-0.5">{cat.desc}</span>
-                          </span>
-                        </Link>
-                      );
-                    })}
+                  {/* Service list — vertical, text-first */}
+                  <div className="py-2">
+                    {serviceCategories.map((cat, i) => (
+                      <Link
+                        key={cat.label}
+                        href={cat.href}
+                        role="menuitem"
+                        onClick={() => setServicesOpen(false)}
+                        className={[
+                          "group flex flex-col px-5 py-3 transition-colors duration-150 hover:bg-[#f0f9ff]",
+                          i < serviceCategories.length - 1 ? "border-b border-[#f1f5f9]" : "",
+                        ].join(" ")}
+                      >
+                        <span className="text-sm font-semibold text-[#0f172a] group-hover:text-[#00b4d8] transition-colors leading-snug">
+                          {cat.label}
+                        </span>
+                        <span className="text-xs text-[#94a3b8] mt-0.5 leading-tight">
+                          {cat.sub}
+                        </span>
+                      </Link>
+                    ))}
                   </div>
 
-                  {/* Footer link */}
-                  <div className="mt-3 border-t border-[#f1f5f9] pt-3 px-1">
+                  {/* Footer — View all services */}
+                  <div className="border-t border-[#e2e8f0] bg-[#f8fafc] px-5 py-3">
                     <Link
                       href="/services"
                       onClick={() => setServicesOpen(false)}
-                      className="flex items-center justify-between rounded-lg px-2 py-1.5 text-sm font-medium text-[#0369a1] hover:text-[#00b4d8] transition-colors"
+                      className="flex items-center gap-1.5 text-xs font-semibold text-[#0369a1] hover:text-[#00b4d8] transition-colors"
                     >
-                      View all services
-                      <span className="text-xs">→</span>
+                      View all services <ArrowRight size={12} />
                     </Link>
                   </div>
                 </motion.div>
@@ -214,103 +217,124 @@ export default function Header() {
             </AnimatePresence>
           </div>
 
-          {/* Other nav links */}
+          {/* Other nav links: Careers, Blog, About */}
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={linkClass}>
+            <Link key={link.href} href={link.href} className={navLinkClass(link.href)}>
               {link.label}
             </Link>
           ))}
         </div>
 
-        {/* Desktop CTAs */}
+        {/* ── Desktop CTA ──────────────────────────────────────────────────── */}
         <div className="hidden lg:flex items-center gap-3">
           <Link
-            href="/#contact"
-            className={["rounded-md border px-4 py-2 text-sm font-medium transition-all duration-300 hover:border-[#00b4d8] hover:text-[#00b4d8]", scrolled ? "border-[#e2e8f0] text-[#0f172a] hover:bg-[#f8fafc]" : "border-white/20 text-[#f1f5f9]"].join(" ")}
+            href="/contact"
+            className="rounded-md bg-[#00b4d8] px-5 py-2.5 text-sm font-semibold text-[#0f172a] transition-all duration-200 hover:bg-[#0096b7] hover:shadow-md hover:shadow-[#00b4d8]/25"
           >
-            Contact Us
-          </Link>
-          <Link
-            href="/#contact"
-            className="rounded-md bg-[#00b4d8] px-4 py-2 text-sm font-semibold text-[#0f172a] transition-all duration-300 hover:bg-[#0096b7]"
-          >
-            Get Started
+            Get in Touch
           </Link>
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* ── Mobile Hamburger ─────────────────────────────────────────────── */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={["lg:hidden relative z-50 p-2 transition-colors duration-300", scrolled ? "text-[#0f172a]" : "text-[#f1f5f9]"].join(" ")}
+          className={[
+            "lg:hidden relative z-50 flex items-center justify-center h-10 w-10 rounded-lg transition-colors duration-300",
+            mobileOpen
+              ? "text-[#0f172a]"
+              : scrolled
+              ? "text-[#0f172a]"
+              : "text-[#f1f5f9]",
+          ].join(" ")}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile Menu ───────────────────────────────────────────────────── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.15 }}
             data-mobile-menu
-            className="fixed inset-0 z-40 bg-white lg:hidden overflow-y-auto"
+            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 40 }}
+            className="bg-white lg:hidden overflow-y-auto"
           >
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="flex min-h-screen flex-col items-start justify-center gap-5 px-10 py-20"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="flex min-h-screen flex-col items-start justify-center gap-5 px-8 py-20"
             >
-              {/* Services section in mobile */}
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.3 }} className="w-full">
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Services</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {serviceCategories.map((cat) => {
-                    const Icon = cat.icon;
-                    return (
-                      <Link
-                        key={cat.label}
-                        href={cat.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="flex items-center gap-2 rounded-lg border border-[#e2e8f0] px-3 py-2.5"
-                      >
-                        <Icon size={14} style={{ color: cat.accent }} />
-                        <span className="text-sm font-medium text-[#0f172a]">{cat.label}</span>
-                      </Link>
-                    );
-                  })}
+              {/* Home */}
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0, duration: 0.3 }}>
+                <Link
+                  href="/"
+                  onClick={() => setMobileOpen(false)}
+                  className={`text-2xl font-semibold transition-colors duration-200 ${isActive("/") ? "text-[#00b4d8]" : "text-[#0f172a] hover:text-[#00b4d8]"}`}
+                >
+                  Home
+                </Link>
+              </motion.div>
+
+              {/* Services section — vertical list */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05, duration: 0.3 }}
+                className="w-full"
+              >
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-3">Services</p>
+                <div className="flex flex-col gap-0 rounded-xl border border-[#e2e8f0] overflow-hidden">
+                  {serviceCategories.map((cat) => (
+                    <Link
+                      key={cat.label}
+                      href={cat.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex flex-col px-4 py-3 border-b border-[#f1f5f9] last:border-0 hover:bg-[#f0f9ff] transition-colors"
+                    >
+                      <span className="text-sm font-semibold text-[#0f172a]">{cat.label}</span>
+                      <span className="text-xs text-[#94a3b8] mt-0.5">{cat.sub}</span>
+                    </Link>
+                  ))}
                 </div>
               </motion.div>
 
               <div className="w-full h-px bg-[#e2e8f0]" />
 
+              {/* Careers, Blog, About */}
               {navLinks.map((link, i) => (
-                <motion.div key={link.href} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ delay: (i + 1) * 0.05, duration: 0.3 }}>
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ delay: (i + 2) * 0.05, duration: 0.3 }}
+                >
                   <Link
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="text-2xl font-semibold text-[#0f172a] hover:text-[#00b4d8] transition-colors duration-200"
+                    className={`text-2xl font-semibold transition-colors duration-200 ${isActive(link.href) ? "text-[#00b4d8]" : "text-[#0f172a] hover:text-[#00b4d8]"}`}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
 
-              <div className="mt-4 flex flex-col gap-3 w-full max-w-xs">
+              <div className="mt-4 w-full max-w-xs">
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.3 }}>
-                  <Link href="/#contact" onClick={() => setMobileOpen(false)} className="block rounded-md border border-[#e2e8f0] px-6 py-3 text-center text-sm font-medium text-[#0f172a] transition-colors duration-200 hover:border-[#00b4d8] hover:text-[#00b4d8]">
-                    Contact Us
-                  </Link>
-                </motion.div>
-                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.3 }}>
-                  <Link href="/#contact" onClick={() => setMobileOpen(false)} className="block rounded-md bg-[#00b4d8] px-6 py-3 text-center text-sm font-semibold text-[#0f172a] transition-colors duration-200 hover:bg-[#0096b7]">
-                    Get Started
+                  <Link
+                    href="/contact"
+                    onClick={() => setMobileOpen(false)}
+                    className="block rounded-md bg-[#00b4d8] px-6 py-3 text-center text-sm font-semibold text-[#0f172a] hover:bg-[#0096b7] transition-colors"
+                  >
+                    Get in Touch
                   </Link>
                 </motion.div>
               </div>

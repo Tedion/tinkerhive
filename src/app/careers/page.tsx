@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ArrowRight, MapPin, Clock, Briefcase } from "lucide-react";
+import { ArrowRight, MapPin, Briefcase } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Careers at TinkerHive — Work With World-Class Engineers",
+  title: "Careers — Work With World-Class Engineers",
   description:
     "TinkerHive is a remote-first engineering firm building and running software products for clients across 4 continents. See open roles and learn what it's like to work here.",
   alternates: { canonical: "/careers" },
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
     title: "Careers at TinkerHive — Work With World-Class Engineers",
     description:
       "Join a small, high-impact engineering team doing meaningful work for clients across Africa, the US, EU, and beyond.",
-    url: "https://tinkerhive.com/careers",
+    url: "https://tinkerhive.dev/careers",
   },
 };
 
@@ -31,6 +30,7 @@ const openRoles = [
     title: "Senior DevOps / Platform Engineer",
     type: "Full-time · Contract",
     location: "Remote (Addis Ababa preferred)",
+    closed: true,
     description:
       "We're looking for a senior engineer who can design and run production Kubernetes clusters, build CI/CD pipelines, and manage cloud infrastructure across AWS, GCP, and private cloud. You'll own entire systems, not just tickets.",
     requirements: [
@@ -45,6 +45,7 @@ const openRoles = [
     title: "Full-Stack Software Engineer",
     type: "Full-time · Contract",
     location: "Remote",
+    closed: true,
     description:
       "We need a full-stack engineer who can build production web applications end-to-end — from database schema to deployed frontend. You'll work across the full stack on real client products.",
     requirements: [
@@ -59,6 +60,7 @@ const openRoles = [
     title: "AI / ML Engineer",
     type: "Contract",
     location: "Remote",
+    closed: true,
     description:
       "Looking for an engineer who can build AI applications and MLOps infrastructure — RAG pipelines, LLM integrations, model serving, and workflow automation. Must have shipped something real.",
     requirements: [
@@ -113,10 +115,10 @@ export default function CareersPage() {
         <section className="bg-[#f8fafc] py-24">
           <div className="mx-auto max-w-7xl px-6">
             <div className="mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Open Roles</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#0369a1] mb-3">Roles</p>
               <h2 className="text-3xl font-bold text-[#0f172a]">Current openings</h2>
               <p className="mt-3 text-[#475569]">
-                Don&apos;t see your role? Email us anyway at{" "}
+                All positions are currently filled. Email us anyway at{" "}
                 <a href="mailto:hello@tinkerhive.dev" className="text-[#0369a1] hover:underline font-medium">
                   hello@tinkerhive.dev
                 </a>
@@ -125,10 +127,19 @@ export default function CareersPage() {
             </div>
             <div className="space-y-6">
               {openRoles.map((role) => (
-                <div key={role.title} className="bg-white rounded-xl border border-[#e2e8f0] p-8 hover:shadow-md transition-shadow">
+                <div
+                  key={role.title}
+                  className="bg-white rounded-xl border border-[#e2e8f0] p-8 opacity-70"
+                  style={{ borderTopColor: "#94a3b8", borderTopWidth: 3 }}
+                >
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     <div>
-                      <h3 className="text-xl font-bold text-[#0f172a] mb-2">{role.title}</h3>
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-bold text-[#0f172a]">{role.title}</h3>
+                        <span className="inline-block rounded-full bg-[#f1f5f9] border border-[#e2e8f0] px-2.5 py-0.5 text-xs font-semibold text-[#64748b] uppercase tracking-wide">
+                          Closed
+                        </span>
+                      </div>
                       <div className="flex flex-wrap gap-4 text-sm text-[#64748b]">
                         <span className="flex items-center gap-1.5">
                           <Briefcase size={14} /> {role.type}
@@ -138,12 +149,9 @@ export default function CareersPage() {
                         </span>
                       </div>
                     </div>
-                    <Link
-                      href={`mailto:hello@tinkerhive.dev?subject=Application: ${encodeURIComponent(role.title)}`}
-                      className="inline-flex items-center gap-2 rounded-lg bg-[#00b4d8] px-5 py-2.5 text-sm font-semibold text-[#0f172a] hover:bg-[#0096b7] transition-colors whitespace-nowrap shrink-0"
-                    >
-                      Apply Now <ArrowRight size={14} />
-                    </Link>
+                    <span className="inline-flex items-center gap-2 rounded-lg bg-[#f1f5f9] border border-[#e2e8f0] px-5 py-2.5 text-sm font-semibold text-[#94a3b8] whitespace-nowrap shrink-0 cursor-not-allowed">
+                      Position Closed
+                    </span>
                   </div>
                   <p className="mt-4 text-[#475569] text-sm leading-relaxed">{role.description}</p>
                   <div className="mt-4">
@@ -151,7 +159,7 @@ export default function CareersPage() {
                     <ul className="space-y-1.5">
                       {role.requirements.map((r) => (
                         <li key={r} className="flex items-start gap-2 text-sm text-[#475569]">
-                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#00b4d8] shrink-0" />
+                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#94a3b8] shrink-0" />
                           {r}
                         </li>
                       ))}

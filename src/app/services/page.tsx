@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { ArrowRight, Check } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Services — TinkerHive | Software, DevOps & Cloud Engineering",
+  title: "Services — Software, DevOps & Cloud Engineering",
   description:
     "TinkerHive offers end-to-end software development, DevOps, cloud infrastructure, AI engineering, private cloud, and 24/7 managed operations for businesses worldwide.",
   alternates: { canonical: "/services" },
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Services — TinkerHive | Software, DevOps & Cloud Engineering",
     description:
       "From web and mobile apps to Kubernetes clusters, AI pipelines, and 24/7 managed support — TinkerHive delivers the full engineering stack.",
-    url: "https://tinkerhive.com/services",
+    url: "https://tinkerhive.dev/services",
   },
 };
 
@@ -152,59 +152,130 @@ export default function ServicesPage() {
       <Header />
       <main id="main-content">
         {/* Hero */}
-        <section className="bg-[#0f172a] pt-32 pb-24">
-          <div className="mx-auto max-w-7xl px-6">
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-4">What We Do</p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#f1f5f9] leading-tight max-w-3xl">
-              Everything you need.<br />
-              <span className="text-[#00b4d8]">Under one roof.</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg text-[#94a3b8] leading-relaxed">
-              Software development, cloud infrastructure, DevOps, AI engineering, and 24/7 managed operations.
-              One team, one contract, no handoffs.
+        <section className="relative bg-[#0f172a] pt-32 pb-0 overflow-hidden">
+          {/* Background glow */}
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] rounded-full bg-[#00b4d8]/10 blur-[140px]" />
+            <div className="absolute bottom-0 right-0 w-[500px] h-[400px] rounded-full bg-[#7c3aed]/10 blur-[120px]" />
+          </div>
+
+          <div className="relative mx-auto max-w-7xl px-6">
+            {/* Label */}
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#00b4d8] mb-5">
+              What We Do
             </p>
+
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#f1f5f9] leading-[1.08] max-w-3xl">
+              One team.<br />
+              <span className="bg-gradient-to-r from-[#00b4d8] to-[#67e8f9] bg-clip-text text-transparent">
+                Every layer of your stack.
+              </span>
+            </h1>
+
+            {/* Problem-solution sub */}
+            <p className="mt-6 max-w-2xl text-lg text-[#94a3b8] leading-relaxed">
+              Most companies stitch together 4–6 vendors to cover software, cloud, DevOps, AI, and support.
+              We replace all of them — one team, one contract, zero handoffs.
+            </p>
+
+            {/* Key differentiators — inline chips */}
+            <div className="mt-6 flex flex-wrap gap-2">
+              {[
+                "Software Development",
+                "Cloud & Infrastructure",
+                "DevOps & Platform Engineering",
+                "AI Engineering",
+                "Security",
+                "24/7 Managed Ops",
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-block rounded-full border border-[#1e293b] bg-[#1e293b]/60 px-3 py-1 text-xs font-medium text-[#94a3b8]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* CTAs */}
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 rounded-lg bg-[#00b4d8] px-6 py-3 font-semibold text-[#0f172a] hover:bg-[#0096b7] transition-colors"
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#00b4d8] px-6 py-3 font-semibold text-[#0f172a] hover:bg-[#0096b7] hover:shadow-lg hover:shadow-[#00b4d8]/25 transition-all"
               >
-                Get a Quote <ArrowRight size={16} />
+                Get a Free Quote <ArrowRight size={16} />
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 rounded-lg border border-[#334155] px-6 py-3 font-semibold text-[#f1f5f9] hover:border-[#00b4d8]/50 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg border border-[#334155] px-6 py-3 font-semibold text-[#f1f5f9] hover:border-[#00b4d8]/50 hover:text-[#00b4d8] transition-all"
               >
-                About Us
+                How We Work
               </Link>
+            </div>
+
+            {/* Trust stats bar */}
+            <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 divide-x divide-[#1e293b] border-t border-[#1e293b]">
+              {[
+                { value: "10+", label: "Projects delivered" },
+                { value: "4", label: "Continents served" },
+                { value: "8+", label: "Years of engineering" },
+                { value: "< 4hr", label: "Incident SLA" },
+              ].map((stat) => (
+                <div key={stat.label} className="px-6 py-6 first:pl-0">
+                  <p className="text-2xl font-bold text-[#00b4d8]">{stat.value}</p>
+                  <p className="text-xs text-[#64748b] mt-1">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Services */}
-        {services.map((group) => (
-          <section key={group.category} id={group.id} className="py-20 border-b border-[#e2e8f0] bg-white last:border-0">
+        {services.map((group, gi) => (
+          <section
+            key={group.category}
+            id={group.id}
+            className={[
+              "py-20 border-b border-[#e2e8f0] last:border-0",
+              gi % 2 === 0 ? "bg-white" : "bg-[#f8fafc]",
+            ].join(" ")}
+          >
             <div className="mx-auto max-w-7xl px-6">
-              <div className="mb-10">
-                <h2
-                  className="inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-3 text-[#0f172a]"
-                  style={{ backgroundColor: `${group.accent}22` }}
+              {/* Section header */}
+              <div className="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                <div>
+                  <span
+                    className="inline-block text-xs font-bold uppercase tracking-[0.15em] px-3 py-1 rounded-full mb-3"
+                    style={{ backgroundColor: `${group.accent}18`, color: group.accent }}
+                  >
+                    {group.category}
+                  </span>
+                  <h2 className="text-2xl font-bold text-[#0f172a]">{group.category}</h2>
+                </div>
+                <Link
+                  href="/contact"
+                  className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors"
+                  style={{ color: group.accent }}
                 >
-                  {group.category}
-                </h2>
+                  Talk to us about this <ArrowRight size={14} />
+                </Link>
               </div>
+
+              {/* Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {group.items.map((item) => (
                   <div
                     key={item.title}
-                    className="rounded-xl border border-[#e2e8f0] p-6 hover:shadow-md transition-shadow"
+                    className="group rounded-xl border border-[#e2e8f0] bg-white p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
                     style={{ borderTopColor: group.accent, borderTopWidth: 3 }}
                   >
-                    <h3 className="text-lg font-bold text-[#0f172a] mb-2">{item.title}</h3>
+                    <h3 className="text-base font-bold text-[#0f172a] mb-2 group-hover:text-[#0369a1] transition-colors">{item.title}</h3>
                     <p className="text-sm text-[#475569] leading-relaxed mb-4">{item.description}</p>
                     <ul className="space-y-2">
                       {item.bullets.map((b) => (
                         <li key={b} className="flex items-start gap-2 text-sm text-[#475569]">
-                          <Check size={14} className="mt-0.5 shrink-0" style={{ color: group.accent }} />
+                          <Check size={13} className="mt-0.5 shrink-0" style={{ color: group.accent }} />
                           {b}
                         </li>
                       ))}
@@ -217,18 +288,36 @@ export default function ServicesPage() {
         ))}
 
         {/* CTA */}
-        <section className="bg-[#0f172a] py-20">
-          <div className="mx-auto max-w-7xl px-6 text-center">
-            <h2 className="text-3xl font-bold text-[#f1f5f9] mb-4">Not sure what you need?</h2>
-            <p className="text-[#94a3b8] mb-8 max-w-xl mx-auto">
-              Book a free 30-minute call. We&apos;ll listen, ask the right questions, and tell you exactly what we&apos;d recommend.
+        <section className="bg-[#0f172a] py-20 relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-[#00b4d8]/10 blur-[120px]" />
+          </div>
+          <div className="relative mx-auto max-w-7xl px-6 text-center">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#00b4d8] mb-4">Ready to start?</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#f1f5f9] mb-4">
+              Not sure what you need?
+            </h2>
+            <p className="text-[#94a3b8] mb-8 max-w-lg mx-auto leading-relaxed">
+              Book a free 30-minute call. We&apos;ll listen, ask the right questions, and tell you exactly what we&apos;d build — and what we wouldn&apos;t.
             </p>
-            <Link
-              href="/#contact"
-              className="inline-flex items-center gap-2 rounded-lg bg-[#00b4d8] px-8 py-4 font-semibold text-[#0f172a] hover:bg-[#0096b7] transition-colors"
-            >
-              Book a Free Call <ArrowRight size={16} />
-            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#00b4d8] px-8 py-4 font-semibold text-[#0f172a] hover:bg-[#0096b7] hover:shadow-lg hover:shadow-[#00b4d8]/25 transition-all"
+              >
+                Book a Free Call <ArrowRight size={16} />
+              </Link>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 rounded-lg border border-[#334155] px-8 py-4 font-semibold text-[#f1f5f9] hover:border-[#00b4d8]/50 hover:text-[#00b4d8] transition-all"
+              >
+                How We Work
+              </Link>
+            </div>
+            {/* Trust line */}
+            <p className="mt-8 text-xs text-[#475569]">
+              No commitment. No sales deck. Just an honest conversation about your project.
+            </p>
           </div>
         </section>
       </main>

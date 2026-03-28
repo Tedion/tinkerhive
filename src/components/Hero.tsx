@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -33,7 +34,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-4xl px-6 py-32 text-center">
+      <div className="relative z-10 mx-auto w-full max-w-4xl px-4 sm:px-6 py-32 text-center">
         {/* Announcement banner */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -53,7 +54,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0 }}
           className="font-extrabold tracking-tight leading-[1.08]"
-          style={{ fontSize: "clamp(2.75rem, 5vw + 1rem, 4rem)" }}
+          style={{ fontSize: "clamp(2.2rem, 5vw + 1rem, 4rem)" }}
         >
           <span className="text-[#f1f5f9]">Built to Launch.</span>
           <br />
@@ -80,8 +81,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="group inline-flex items-center gap-2 rounded-lg bg-[#00b4d8] px-7 py-3.5 font-semibold text-[#0f172a] transition-all duration-300 hover:bg-[#0096b7] hover:brightness-110 hover:shadow-lg hover:shadow-[#00b4d8]/25 cursor-pointer will-change-transform"
           >
             Start Your Project
@@ -89,13 +90,13 @@ export default function Hero() {
               size={18}
               className="transition-transform group-hover:translate-x-1"
             />
-          </a>
-          <a
-            href="#services"
+          </Link>
+          <Link
+            href="/services"
             className="inline-flex items-center gap-2 rounded-lg border border-[#334155] px-7 py-3.5 font-semibold text-[#f1f5f9] transition-all duration-300 hover:border-[#00b4d8]/50 hover:text-[#00b4d8] hover:shadow-[0_0_15px_rgba(0,180,216,0.15)] cursor-pointer will-change-transform"
           >
-            Explore Our Work
-          </a>
+            Explore Services
+          </Link>
         </motion.div>
 
         {/* Stat strip */}
@@ -106,9 +107,9 @@ export default function Hero() {
           className="mt-8 flex items-center justify-center gap-4 text-sm text-[#64748b]"
         >
           <span>10+ Projects Delivered</span>
-          <span className="text-[#334155]">|</span>
+          <span className="text-[#475569]">|</span>
           <span>99.9% Uptime</span>
-          <span className="text-[#334155]">|</span>
+          <span className="text-[#475569]">|</span>
           <span>&lt;4hr Response Time</span>
         </motion.div>
 

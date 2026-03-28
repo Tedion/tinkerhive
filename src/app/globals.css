@@ -43,11 +43,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display), system-ui, sans-serif;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: inherit;
-}
-
-h1, h2, h3 {
-  text-wrap: balance;
 }
 
 /* ========================================

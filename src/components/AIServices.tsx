@@ -217,6 +217,8 @@ export default function AIServices() {
         <AnimateIn variant="fadeUp" delay={0.1}>
           {/* Tab bar */}
           <div
+            role="tablist"
+            aria-label="AI service categories"
             className="flex flex-wrap gap-0 border-b mb-0"
             style={{ borderColor: "rgba(255,255,255,0.1)" }}
           >
@@ -225,7 +227,18 @@ export default function AIServices() {
               return (
                 <button
                   key={tab.id}
+                  role="tab"
+                  id={`tab-${tab.id}`}
+                  aria-selected={i === activeTab}
+                  aria-controls={`tabpanel-${tab.id}`}
                   onClick={() => setActiveTab(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowRight") setActiveTab((prev) => (prev + 1) % tabs.length);
+                    if (e.key === "ArrowLeft") setActiveTab((prev) => (prev - 1 + tabs.length) % tabs.length);
+                    if (e.key === "Home") setActiveTab(0);
+                    if (e.key === "End") setActiveTab(tabs.length - 1);
+                  }}
+                  tabIndex={i === activeTab ? 0 : -1}
                   className={cn(
                     "flex items-center gap-2 px-5 py-3 text-sm transition-colors duration-200 border-b-2 -mb-px cursor-pointer",
                     i === activeTab
@@ -242,6 +255,9 @@ export default function AIServices() {
 
           {/* Tab content */}
           <div
+            role="tabpanel"
+            id={`tabpanel-${current.id}`}
+            aria-labelledby={`tab-${current.id}`}
             className="rounded-b-xl border border-t-0 p-8 sm:p-10 overflow-hidden"
             style={{
               borderColor: "rgba(255,255,255,0.08)",

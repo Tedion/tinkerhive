@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tinkerhive.com"),
+  metadataBase: new URL("https://tinkerhive.dev"),
   alternates: {
     canonical: "/",
   },
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: "TinkerHive — Software Engineering, DevOps & Cloud Infrastructure",
     description:
       "Founder-led engineering firm. We build your product, launch it, and keep it running — all under one roof. 10+ projects delivered across 4 continents.",
-    url: "https://tinkerhive.com",
+    url: "https://tinkerhive.dev",
     siteName: "TinkerHive",
     type: "website",
     locale: "en_US",
@@ -107,10 +107,10 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "@id": "https://tinkerhive.com/#organization",
+                "@id": "https://tinkerhive.dev/#organization",
                 name: "TinkerHive",
-                url: "https://tinkerhive.com",
-                logo: "https://tinkerhive.com/icon.png",
+                url: "https://tinkerhive.dev",
+                logo: "https://tinkerhive.dev/icon.svg",
                 description: "Founder-led software engineering and DevOps firm. We build, launch, and maintain software products for businesses worldwide.",
                 email: "hello@tinkerhive.dev",
                 foundingDate: "2025",
@@ -145,14 +145,14 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "@id": "https://tinkerhive.com/#website",
-                url: "https://tinkerhive.com",
+                "@id": "https://tinkerhive.dev/#website",
+                url: "https://tinkerhive.dev",
                 name: "TinkerHive",
-                publisher: { "@id": "https://tinkerhive.com/#organization" },
+                publisher: { "@id": "https://tinkerhive.dev/#organization" },
                 potentialAction: {
-                  "@type": "SearchAction",
-                  target: { "@type": "EntryPoint", urlTemplate: "https://tinkerhive.com/?q={search_term_string}" },
-                  "query-input": "required name=search_term_string",
+                  "@type": "ContactAction",
+                  target: "https://tinkerhive.dev/#contact",
+                  name: "Contact TinkerHive",
                 },
               },
             ]),

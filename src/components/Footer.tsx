@@ -6,14 +6,14 @@ import { FaGithub, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import Logo from "./Logo";
 
 const serviceLinks = [
-  "Web Development",
-  "App Development",
-  "AI Development",
-  "AI Automation",
-  "Cloud Management",
-  "Private Cloud",
-  "DevOps",
-  "Security",
+  { label: "Web Development",  href: "/services#software-development" },
+  { label: "App Development",  href: "/services#software-development" },
+  { label: "AI Development",   href: "/services#ai-engineering" },
+  { label: "AI Automation",    href: "/services#ai-engineering" },
+  { label: "Cloud Management", href: "/services#cloud-infrastructure" },
+  { label: "Private Cloud",    href: "/services#cloud-infrastructure" },
+  { label: "DevOps",           href: "/services#devops-platform-engineering" },
+  { label: "Security",         href: "/services#security" },
 ];
 
 const companyLinks = [
@@ -22,7 +22,7 @@ const companyLinks = [
   { label: "Careers", href: "/careers" },
   { label: "How It Works", href: "/#process" },
   { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const resourceLinks = [
@@ -86,13 +86,13 @@ export default function Footer() {
               Services
             </h3>
             <ul className="mt-4 space-y-3">
-              {serviceLinks.map((service) => (
-                <li key={service}>
+              {serviceLinks.map((link) => (
+                <li key={link.label}>
                   <Link
-                    href="#services"
+                    href={link.href}
                     className="text-sm text-[#94a3b8] transition-colors duration-200 hover:text-[#f1f5f9]"
                   >
-                    {service}
+                    {link.label}
                   </Link>
                 </li>
               ))}

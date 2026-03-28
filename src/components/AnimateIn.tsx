@@ -4,7 +4,7 @@ import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 12 },
   visible: { opacity: 1, y: 0 },
 };
 
@@ -64,7 +64,7 @@ export default function AnimateIn({
   // When threshold is set, don't use negative margin (avoids stuck animations)
   const viewport = threshold !== undefined
     ? { once, amount: threshold }
-    : { once, margin: "-80px" as const };
+    : { once, margin: "0px" as const };
 
   return (
     <motion.div
@@ -93,7 +93,7 @@ export function StaggerContainer({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "0px" }}
       transition={{ staggerChildren: stagger }}
       className={className}
     >

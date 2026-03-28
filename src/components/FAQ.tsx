@@ -47,7 +47,7 @@ export default function FAQ() {
     <section id="faq" className="bg-[#f8fafc] py-20 sm:py-28">
       <div className="mx-auto max-w-3xl px-6">
         <AnimateIn variant="fadeUp" className="text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-[#94a3b8]">
+          <p className="text-sm font-semibold uppercase tracking-wider text-[#0369a1]">
             FAQ
           </p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#0f172a] sm:text-4xl">
