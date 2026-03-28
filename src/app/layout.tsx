@@ -99,7 +99,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${outfit.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans bg-background text-foreground">
+      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans bg-background text-foreground overflow-x-hidden">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
