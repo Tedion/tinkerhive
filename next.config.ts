@@ -22,13 +22,13 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               // Next.js inline scripts and styles
-              "script-src 'self' 'unsafe-inline'",
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               // Images: allow self, data URIs, and common CDNs used in the project
-              "img-src 'self' data: https:",
+              "img-src 'self' data: https: https://www.googletagmanager.com",
               // Fetch/XHR only to own origin
-              "connect-src 'self' https://api.web3forms.com",
+              "connect-src 'self' https://api.web3forms.com https://www.google-analytics.com https://analytics.google.com https://*.google-analytics.com https://*.analytics.google.com",
               // No frames, objects, or base redirects
               "frame-src 'none'",
               "object-src 'none'",

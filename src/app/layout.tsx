@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -86,6 +87,9 @@ export const metadata: Metadata = {
     },
   },
   category: "technology",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GSC_ID || undefined,
+  },
 };
 
 export default function RootLayout({
@@ -158,6 +162,7 @@ export default function RootLayout({
             ]),
           }}
         />
+        <GoogleAnalytics />
         <a href="#main-content" className="skip-to-content">
           Skip to content
         </a>
